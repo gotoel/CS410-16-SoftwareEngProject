@@ -31,17 +31,13 @@ public class GetUnpublishedEvents extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String dbURL="jdbc:mysql://149.56.12.59:3306/cs410?zeroDateTimeBehavior=convertToNull";
-        String driver = "com.mysql.jdbc.Driver";
-        String userName="cs410";
-        String pass="db123";
         Connection con;
         PreparedStatement ps;
         ResultSet rs;      
         try 
             {
-                Class.forName(driver);
-                con= DriverManager.getConnection(dbURL,userName,pass);
+                Class.forName(DBInfo.dbDriver);
+                con= DriverManager.getConnection(DBInfo.dbURL,DBInfo.dbUsername,DBInfo.dbPass);
                 ps=con.prepareStatement("select * from events where isPublished=0");
                 rs=ps.executeQuery();
                 
