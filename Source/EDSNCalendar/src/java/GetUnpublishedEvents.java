@@ -42,7 +42,7 @@ public class GetUnpublishedEvents extends HttpServlet {
             {
                 Class.forName(driver);
                 con= DriverManager.getConnection(dbURL,userName,pass);
-                ps=con.prepareStatement("select * from events where isPublished=1");
+                ps=con.prepareStatement("select * from events where isPublished=0");
                 rs=ps.executeQuery();
                 
                 request.setAttribute("events",rs);
