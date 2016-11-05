@@ -81,8 +81,7 @@
     <hr>
     <div id="approvalRequired" class="row-fluid">
       <div class="span12">
-       <!--
-        <div class="widget-box">
+        <div id="approvalRequired" class="widget-box">
           <div class="widget-title"> <span class="icon">
             <input type="checkbox" id="title-checkbox" name="title-checkbox" />
             </span>
@@ -91,28 +90,53 @@
           <div class="widget-content nopadding">
             <table class="table table-bordered table-striped with-check">
               <thead>
-                <tr>
-                  <th><i class="icon-resize-vertical"></i></th>
-                  <th>Rendering engine</th>
-                  <th>Browser</th>
-                  <th>Platform(s)</th>
-                  <th>Engine version</th>
+                  <tr>
+                  <th></th>
+                  <th>id</th>
+                  <th>start_date</th>
+                  <th>start_time</th>
+                  <th>end_date</th>
+                  <th>end_time</th>
+                  <th>summary</th>
+                  <th>description</th>
+                  <th>location</th>
+                  <th>colorId</th>
+                  <th>Action</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td><input type="checkbox" /></td>
-                  <td>Trident</td>
-                  <td>Internet
-                    Explorer 4.0</td>
-                  <td>Win 95+</td>
-                  <td class="center"> 4</td>
-                </tr>
+                  <% ResultSet resultSet = (ResultSet)request.getAttribute("events");%>
+                      <%while(resultSet.next()){%>
+                        <%if(resultSet.getString("isPublished").equals("0")) {%>
+                            <tr class="gradeX">
+                                <td><input type="checkbox" /></td>
+                                <td> <center><%= resultSet.getString("id") %></center></td>
+                                <td> <center><%= resultSet.getString("start_date") %></center></td>
+                                <td> <center><%= resultSet.getString("start_time") %></center></td>
+                                <td> <center><%= resultSet.getString("end_date") %></center></td>
+                                <td> <center><%= resultSet.getString("end_time") %></center></td>
+                                <td> <center><%= resultSet.getString("summary") %></center></td>
+                                <td> <center><%= resultSet.getString("description") %></center></td>
+                                <td> <center><%= resultSet.getString("location") %></center></td>
+                                <td> <center><%= resultSet.getString("colorId") %></center></td>
+                                <td>
+                                    <center>
+                                        <a href="#" class="btn btn-success btn-mini">Publish</a> 
+                                        <a href="#" class="btn btn-danger btn-mini">Delete</a>
+                                    </center>
+                                </td>
+                            </tr>
+                        <%}%>
+                      <%}%>
               </tbody>
             </table>
           </div>
         </div>
-        -->
+        <div style="text-align: right;">
+            <a href="#" class="btn btn-success btn">Publish selected</a> 
+            <a href="#" class="btn btn-danger btn">Delete selected</a>
+        </div>
+        <hr>
         <div id="allEvents" class="widget-box">
           <div class="widget-title"> <span class="icon"><i class="icon-th"></i></span>
             <h5>Events</h5>
@@ -134,19 +158,19 @@
                 </tr>
               </thead>
               <tbody>
-                  <% ResultSet resultSet = (ResultSet)request.getAttribute("events");%>
+                  <% resultSet.beforeFirst();%>
                       <%while(resultSet.next()){%>
                           <tr class="gradeX">
-                              <td> <%= resultSet.getString("id") %></td>
-                              <td> <%= resultSet.getString("start_date") %></td>
-                              <td> <%= resultSet.getString("start_time") %></td>
-                              <td> <%= resultSet.getString("end_date") %></td>
-                              <td> <%= resultSet.getString("end_time") %></td>
-                              <td> <%= resultSet.getString("summary") %></td>
-                              <td> <%= resultSet.getString("description") %></td>
-                              <td> <%= resultSet.getString("location") %></td>
-                              <td> <%= resultSet.getString("colorId") %></td>
-                              <td> <%= resultSet.getString("isPublished") %></td>
+                              <td> <center><%= resultSet.getString("id") %></center></td>
+                              <td> <center><%= resultSet.getString("start_date") %></center></td>
+                              <td> <center><%= resultSet.getString("start_time") %></center></td>
+                              <td> <center><%= resultSet.getString("end_date") %></center></td>
+                              <td> <center><%= resultSet.getString("end_time") %></center></td>
+                              <td> <center><%= resultSet.getString("summary") %></center></td>
+                              <td> <center><%= resultSet.getString("description") %></center></td>
+                              <td> <center><%= resultSet.getString("location") %></center></td>
+                              <td> <center><%= resultSet.getString("colorId") %></center></td>
+                              <td> <center><%= resultSet.getString("isPublished") %></center></td>
                           </tr>
                       <%}%>
               </tbody>
