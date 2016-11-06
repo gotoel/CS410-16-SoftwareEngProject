@@ -1,5 +1,3 @@
-
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.DriverManager;
@@ -30,34 +28,71 @@ public class GetUnpublishedEvents extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        // Get the request action from the POST (either a list of events is returned of an amount of 
+        // events.
+        String requestAction = request.getParameter("requestAction");
+        PrintWriter out = response.getWriter();
         response.setContentType("text/html;charset=UTF-8");
         Connection con;
         PreparedStatement ps;
-        ResultSet rs,rsS,rsC;      
+        ResultSet rs;      
         try 
-            {
-                Class.forName(DBInfo.dbDriver);
-                con= DriverManager.getConnection(DBInfo.dbURL,DBInfo.dbUsername,DBInfo.dbPass);
-                ps=con.prepareStatement("select * from events where isPublished=0");
-                rs=ps.executeQuery();
-                
-                request.setAttribute("events",rs);
-                ps=con.prepareStatement("select * from events");
-                rsS = ps.executeQuery();
-                request.setAttribute("Scriteria", rsS);
-                
-                ps = con.prepareStatement("select * from events");
-                rsC = ps.executeQuery();
-                request.setAttribute("Ccriteria", rsC); //description
-                request.getRequestDispatcher("Tables.jsp").forward(request,response);
+        {
+            Class.forName(DBInfo.dbDriver);
+            con= DriverManager.getConnection(DBInfo.dbURL,DBInfo.dbUsername,DBInfo.dbPass);
+            // Get a result set of all unpublished events, so where isPublished is set to 0.
+            ps=con.prepareStatement("select * from events where isPublished=0", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            rs=ps.executeQuery();
 
+            String outString = "";
+            
+            if(requestAction.equals("eventsList")) {
+                // Loop through the result set and build the HTML table rows w/ data.
+                while(rs.next()){
+                    outString += "<tr class=\"gradeX\">\n";
+                    outString += "\t<td><input type=\"checkbox\" /></td>\n";
+                    outString += "\t<td> <center>" + rs.getString("id") + "</center></td>\n";
+                    outString += "\t<td> <center>" + rs.getString("start_date") + "</center></td>\n";
+                    outString += "\t<td> <center>" + rs.getString("start_time") + "</center></td>\n";
+                    outString += "\t<td> <center>" + rs.getString("end_date") + "</center></td>\n";
+                    outString += "\t<td> <center>" + rs.getString("end_time") + "</center></td>\n";
+                    outString += "\t<td> <center>" + rs.getString("summary") + "</center></td>\n";
+                    outString += "\t<td> <center>" + rs.getString("description") + "</center></td>\n";
+                    outString += "\t<td> <center>" + rs.getString("location") + "</center></td>\n";
+                    outString += "\t<td> <center>" + rs.getString("colorId") + "</center></td>\n";
+                    
+                    // Add the 'publish' and 'delete' buttons to the last column
+                    // these will contain the javascript calls for the appropriate actions.
+                    outString += "\t<td>\n" +
+                                      "\t\t<center>\n" +
+                                          "\t\t\t<a href=\"#\" class=\"btn btn-success btn-mini\" onclick=\"executePublishAction(" + rs.getString("id") + ",\'publish\');\">Publish</a> \n" +
+                                          "\t\t\t<a href=\"#\" class=\"btn btn-danger btn-mini\" onclick=\"executePublishAction(" + rs.getString("id") + ",\'delete\');\">Delete</a>\n" +
+                                      "\t\t</center>\n" +
+                                  "\t</td>";
+                    outString += "</tr>\n";
+                }
             }
-            catch (SQLException | ClassNotFoundException ex) 
+            else if(requestAction.equals("eventsCount"))
             {
-                System.out.println("Failure");
+                // If we just want to get the little number popup on the dashbored for unapproved events, we can just
+                // go to the last result in the result set and get the row number.
+                if(rs.last()){
+                    outString = "<span class=\"label label-important\" id=\"unapprovedCount\">" + rs.getRow()+ "</span>"; 
+                }
             }
-
-                
+            
+            // Print out the resulting HTML.
+            out.println(outString);
+            
+            con.close();
+            ps.close();
+            rs.close();
+        }
+        catch (SQLException | ClassNotFoundException ex) 
+        {
+            System.out.println("Failure");
+        }      
      }
     
     
@@ -101,6 +136,4 @@ public class GetUnpublishedEvents extends HttpServlet {
         return "Short description";
     } // </editor-fold>
 }
-
-
 

@@ -2,3 +2,9 @@
 /Source/ESDNcalendar/build/
 /Source/ESDNcalendar/dist/
 /Source/EDSNCalendar/dist/
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/

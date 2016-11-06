@@ -1,4 +1,4 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -79,7 +79,45 @@
     <h1>Events</h1>
     <div class="container-fluid">
     <hr>
-    <h5> Filter Events</h5>
+    <div id="publisherResult">
+
+    </div>
+    <div id="approvalRequired" class="row-fluid">
+      <div class="span12">
+        <div id="approvalRequired" class="widget-box">
+          <div class="widget-title"> <span class="icon">
+            <input type="checkbox" id="title-checkbox" name="title-checkbox" onclick="checkAllEvents();"/>
+            </span>
+            <h5>Approval needed</h5>
+          </div>
+          <div class="widget-content nopadding">
+            <table class="table table-bordered table-striped with-check">
+              <thead>
+                  <tr>
+                  <th></th>
+                  <th>id</th>
+                  <th>start_date</th>
+                  <th>start_time</th>
+                  <th>end_date</th>
+                  <th>end_time</th>
+                  <th>summary</th>
+                  <th>description</th>
+                  <th>location</th>
+                  <th>colorId</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="approvalNeededTable">
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div style="text-align: right;">
+            <a href="#" class="btn btn-success btn" onclick="publishSelected();">Publish selected</a> 
+            <a href="#" class="btn btn-danger btn" onclick="deleteSelected();">Delete selected</a>
+        </div>
+        <hr>
+            <h5> Filter Events</h5>
     <div id="criteria" class="row-fluid">
         <form name="myform" action="Filter">
         <% ResultSet rs = (ResultSet)request.getAttribute("Scriteria");%>
@@ -103,45 +141,10 @@
         </form>
     </div> 
     </div>
-    <div id="approvalRequired" class="row-fluid">
-      <div class="span12">
-       <!--
-        <div class="widget-box">
-          <div class="widget-title"> <span class="icon">
-            <input type="checkbox" id="title-checkbox" name="title-checkbox" />
-            </span>
-            <h5>Approval needed</h5>
-          </div>
-          <div class="widget-content nopadding">
-            <table class="table table-bordered table-striped with-check">
-              <thead>
-                <tr>
-                  <th><i class="icon-resize-vertical"></i></th>
-                  <th>Rendering engine</th>
-                  <th>Browser</th>
-                  <th>Platform(s)</th>
-                  <th>Engine version</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><input type="checkbox" /></td>
-                  <td>Trident</td>
-                  <td>Internet
-                    Explorer 4.0</td>
-                  <td>Win 95+</td>
-                  <td class="center"> 4</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-        -->
         <div id="allEvents" class="widget-box">
           <div class="widget-title"> <span class="icon"><i class="icon-th"></i></span>
             <h5>Events</h5>
           </div>
-            
           <div class="widget-content nopadding">
             <table class="table table-bordered data-table">
               <thead>
@@ -162,16 +165,16 @@
                   <% ResultSet resultSet = (ResultSet)request.getAttribute("events");%>
                       <%while(resultSet.next()){%>
                           <tr class="gradeX">
-                              <td> <%= resultSet.getString("id") %></td>
-                              <td> <%= resultSet.getString("start_date") %></td>
-                              <td> <%= resultSet.getString("start_time") %></td>
-                              <td> <%= resultSet.getString("end_date") %></td>
-                              <td> <%= resultSet.getString("end_time") %></td>
-                              <td> <%= resultSet.getString("summary") %></td>
-                              <td> <%= resultSet.getString("description") %></td>
-                              <td> <%= resultSet.getString("location") %></td>
-                              <td> <%= resultSet.getString("colorId") %></td>
-                              <td> <%= resultSet.getString("isPublished") %></td>
+                              <td> <center><%= resultSet.getString("id") %></center></td>
+                              <td> <center><%= resultSet.getString("start_date") %></center></td>
+                              <td> <center><%= resultSet.getString("start_time") %></center></td>
+                              <td> <center><%= resultSet.getString("end_date") %></center></td>
+                              <td> <center><%= resultSet.getString("end_time") %></center></td>
+                              <td> <center><%= resultSet.getString("summary") %></center></td>
+                              <td> <center><%= resultSet.getString("description") %></center></td>
+                              <td> <center><%= resultSet.getString("location") %></center></td>
+                              <td> <center><%= resultSet.getString("colorId") %></center></td>
+                              <td> <center><%= resultSet.getString("isPublished") %></center></td>
                           </tr>
                       <%}%>
               </tbody>
@@ -185,53 +188,4 @@
 
 <!--Action boxes-->
 
-<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@PAGE CODE GOES HERE@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
-
-<!--End-Action boxes-->    
-
-
-<!--end-main-container-part-->
-
-<!--Footer-part-->
-
-<!--end-Footer-part-->
-
-<script src="js/excanvas.min.js"></script> 
-<script src="js/jquery.min.js"></script> 
-<script src="js/jquery.ui.custom.js"></script> 
-<script src="js/bootstrap.min.js"></script> 
-<script src="js/jquery.flot.min.js"></script> 
-<script src="js/jquery.flot.resize.min.js"></script> 
-<script src="js/jquery.peity.min.js"></script> 
-<script src="js/fullcalendar.min.js"></script> 
-<script src="js/matrix.js"></script> 
-<script src="js/matrix.dashboard.js"></script> 
-<script src="js/jquery.gritter.min.js"></script> 
-<script src="js/matrix.interface.js"></script> 
-<script src="js/matrix.chat.js"></script> 
-<script src="js/jquery.validate.js"></script> 
-<script src="js/matrix.form_validation.js"></script> 
-<script src="js/jquery.wizard.js"></script> 
-<script src="js/jquery.uniform.js"></script> 
-<script src="js/select2.min.js"></script> 
-<script src="js/matrix.popover.js"></script> 
-<script src="js/jquery.dataTables.min.js"></script> 
-<script src="js/matrix.tables.js"></script> 
-
-<script type="text/javascript">
-    function fcriteria(){
-        
-        var cr = document.getElementById("summary");
-        var sv = cr.options[cr.selectedIndex].value;
-        document.getElementById("critA").value=sv;
-        
-        var cr = document.getElementById("category");
-        var sv1 = cr.options[cr.selectedIndex].value;
-        //alert(sv1);
-        document.getElementById("critB").value=sv1;
-        if(!(sv===sv1===""))
-            myform.submit(); 
-    }       
-</script>
-</body>
-</html>
+<!-- @&...
