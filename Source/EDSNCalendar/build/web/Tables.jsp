@@ -241,6 +241,21 @@
           }
       }
   }
+  
+  function fcriteria(){
+        
+        var cr = document.getElementById("summary");
+        var sv = cr.options[cr.selectedIndex].value;
+        document.getElementById("critA").value=sv;
+        
+        var cr = document.getElementById("category");
+        var sv1 = cr.options[cr.selectedIndex].value;
+        //alert(sv1);
+        document.getElementById("critB").value=sv1;
+        if(!(sv===sv1===""))
+            myform.submit(); 
+    }       
+
 
 // resets the menu selection upon entry to this page:
 function resetMenu() {
@@ -249,3 +264,4 @@ function resetMenu() {
 </script>
 </body>
 </html>
+
