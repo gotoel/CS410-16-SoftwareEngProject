@@ -119,7 +119,7 @@
         <hr>
             <h5> Filter Events</h5>
     <div id="criteria" class="row-fluid">
-        <form name="myform" action="Filter">
+        <form name="myform" action="Filter" style="padding: 5px 0 0 0;">
         <% ResultSet rs = (ResultSet)request.getAttribute("Scriteria");%>
         <select id="summary">
        <option value="">Summary</option>
@@ -137,7 +137,7 @@
          <%}%>
        </select>
        <input type="hidden" id="critB" name="critB"value=""/>
-       <input type="submit" value="Filter" onclick="fcriteria();"> 
+       <input type="submit" class="btn btn-info" value="Filter" onclick="fcriteria();" style="vertical-align: top;"> 
         </form>
     </div> 
     </div>
