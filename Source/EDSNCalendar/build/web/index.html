@@ -83,7 +83,7 @@
       <ul class="quick-actions">
         <li class="bg_lb"> <a href="index.html"> <i class="icon-dashboard"></i> Dashboard </a> </li>
         <li class="bg_lg span3"> <a href=GetEvents> <i class="icon-list-alt"></i> Events</a> </li>
-        <li class="bg_ly span3"> <a href="GetUnpublishedEvents"> <i class="icon-inbox"></i> <span class="label label-important">20</span> Events waiting for approval </a> </li>
+        <div><li class="bg_ly span3"> <a href="GetEvents"> <i class="icon-inbox"></i> <div id="unapprovedCount"></div> Events waiting for approval </a> </li>
         <li class="bg_lo"> <a href="organize.html"> <i class="icon-tags"></i> Organize</a> </li>
         <li class="bg_ls"> <a href="settings.html"> <i class="icon-wrench"></i> Settings</a> </li>
         <li class="bg_lo span3"> <a href="users.html"> <i class="icon-user"></i> Users</a> </li>
@@ -120,8 +120,10 @@
 <script src="js/matrix.popover.js"></script> 
 <script src="js/jquery.dataTables.min.js"></script> 
 <script src="js/matrix.tables.js"></script> 
+<script src="js/edsn-cal-events.js"/></script>
 
 <script type="text/javascript">
+  getNumOfEventsForApproval();
   // This function is called from the pop-up menus to transfer to
   // a different page. Ignore if the value returned is a null string:
   function goPage (newURL) {

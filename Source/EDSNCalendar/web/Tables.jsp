@@ -79,11 +79,14 @@
     <h1>Events</h1>
     <div class="container-fluid">
     <hr>
+    <div id="publisherResult">
+
+    </div>
     <div id="approvalRequired" class="row-fluid">
       <div class="span12">
         <div id="approvalRequired" class="widget-box">
           <div class="widget-title"> <span class="icon">
-            <input type="checkbox" id="title-checkbox" name="title-checkbox" />
+            <input type="checkbox" id="title-checkbox" name="title-checkbox" onclick="checkAllEvents();"/>
             </span>
             <h5>Approval needed</h5>
           </div>
@@ -104,37 +107,14 @@
                   <th>Action</th>
                 </tr>
               </thead>
-              <tbody>
-                  <% ResultSet resultSet = (ResultSet)request.getAttribute("events");%>
-                      <%while(resultSet.next()){%>
-                        <%if(resultSet.getString("isPublished").equals("0")) {%>
-                            <tr class="gradeX">
-                                <td><input type="checkbox" /></td>
-                                <td> <center><%= resultSet.getString("id") %></center></td>
-                                <td> <center><%= resultSet.getString("start_date") %></center></td>
-                                <td> <center><%= resultSet.getString("start_time") %></center></td>
-                                <td> <center><%= resultSet.getString("end_date") %></center></td>
-                                <td> <center><%= resultSet.getString("end_time") %></center></td>
-                                <td> <center><%= resultSet.getString("summary") %></center></td>
-                                <td> <center><%= resultSet.getString("description") %></center></td>
-                                <td> <center><%= resultSet.getString("location") %></center></td>
-                                <td> <center><%= resultSet.getString("colorId") %></center></td>
-                                <td>
-                                    <center>
-                                        <a href="#" class="btn btn-success btn-mini">Publish</a> 
-                                        <a href="#" class="btn btn-danger btn-mini">Delete</a>
-                                    </center>
-                                </td>
-                            </tr>
-                        <%}%>
-                      <%}%>
+              <tbody id="approvalNeededTable">
               </tbody>
             </table>
           </div>
         </div>
         <div style="text-align: right;">
-            <a href="#" class="btn btn-success btn">Publish selected</a> 
-            <a href="#" class="btn btn-danger btn">Delete selected</a>
+            <a href="#" class="btn btn-success btn" onclick="publishSelected();">Publish selected</a> 
+            <a href="#" class="btn btn-danger btn" onclick="deleteSelected();">Delete selected</a>
         </div>
         <hr>
         <div id="allEvents" class="widget-box">
@@ -158,7 +138,7 @@
                 </tr>
               </thead>
               <tbody>
-                  <% resultSet.beforeFirst();%>
+                  <% ResultSet resultSet = (ResultSet)request.getAttribute("events");%>
                       <%while(resultSet.next()){%>
                           <tr class="gradeX">
                               <td> <center><%= resultSet.getString("id") %></center></td>
@@ -216,8 +196,10 @@
 <script src="js/matrix.popover.js"></script> 
 <script src="js/jquery.dataTables.min.js"></script> 
 <script src="js/matrix.tables.js"></script> 
+<script src="js/edsn-cal-events.js"/></script>
 
 <script type="text/javascript">
+  getApprovalNeededEvents();
   // This function is called from the pop-up menus to transfer to
   // a different page. Ignore if the value returned is a null string:
   function goPage (newURL) {
