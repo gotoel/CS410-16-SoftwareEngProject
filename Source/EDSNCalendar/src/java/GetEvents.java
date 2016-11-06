@@ -6,7 +6,6 @@
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,14 +14,15 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.sql.Connection;
+import java.sql.SQLException;
 
 /**
  *
- * @author gotoel
+ * @author Chris
  */
-@WebServlet(urlPatterns = {"/EventPublisher"})
-public class EventPublisher extends HttpServlet {
-
+@WebServlet(urlPatterns = {"/GetEvents"})
+public class GetEvents extends HttpServlet {
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -34,51 +34,37 @@ public class EventPublisher extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
         Connection con;
-        PreparedStatement ps;
-        ResultSet rs;  
-        PrintWriter out = response.getWriter();
-        try {
-            String eventID = request.getParameter("eventID");
-            String action = request.getParameter("action");
-            
-            if(eventID != null)
+        PreparedStatement ps,psS;
+        ResultSet rs,rsS,rsC;      
+        try 
             {
                 Class.forName(DBInfo.dbDriver);
                 con= DriverManager.getConnection(DBInfo.dbURL,DBInfo.dbUsername,DBInfo.dbPass);
-                ps=con.prepareStatement("UPDATE events SET isPublished=? where id=?");
-                int eventIDNum = Integer.parseInt(eventID.replaceAll("\\s+",""));
-              
-                if(action.equals("publish")) {
-                    ps.setInt(1, 1); // 1 = published
-                    ps.setInt(2, eventIDNum);
-                } 
-                else if(action.equals("delete"))
-                {
-                    ps.setInt(1, 3); // 3 = silent delete (still in db, just not shown)
-                    ps.setInt(2, eventIDNum);
-                }
+                ps=con.prepareStatement("select * from events");
+                rs=ps.executeQuery();
                 
-                if(ps.executeUpdate() == 1)
-                {
-                    String successOutput = "<div class=\"alert alert-success\">\n" +
-                         "<button class=\"close\" data-dismiss=\"alert\">x</button>\n" +
-                         "<strong>Success:</strong>\t\t\tEvent(s) " + 
-                            (action.equals("publish") ? "published." : " deleted.") +"\n" +
-                         "</div>";
-                    out.println(successOutput);
-                }
+                request.setAttribute("events",rs);
+                psS=con.prepareStatement("select * from events");
+                rsS = psS.executeQuery();
+                request.setAttribute("Scriteria",rsS); //summary
+                ps = con.prepareStatement("select * from events");
+                rsC = ps.executeQuery();
+                request.setAttribute("Ccriteria", rsC); //description
+                request.getRequestDispatcher("Tables.jsp").forward(request,response);
+                
+
             }
-        } catch(Exception ex)
-        {
-            String errorOutput = "<div class=\"alert alert-error\">\n" +
-                                    "<button class=\"close\" data-dismiss=\"alert\">x</button>\n" +
-                                    "<strong>Error:</strong>\t\t\t" + ex.toString() +"\n" +
-                                    "</div>";
-            
-            out.println(errorOutput);
-        }
-    }
+            catch (SQLException | ClassNotFoundException ex) 
+            {
+                System.out.println("Failure");
+            }
+
+                
+     }
+    
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -117,6 +103,8 @@ public class EventPublisher extends HttpServlet {
     @Override
     public String getServletInfo() {
         return "Short description";
-    }// </editor-fold>
-
+    } // </editor-fold>
 }
+
+
+

@@ -6,7 +6,6 @@
 
 // merry christmas errybody
 
-// Requests a list of unapproved events from the servlet.
 function getApprovalNeededEvents() {
     if (window.XMLHttpRequest) {
         // code for IE7+, Firefox, Chrome, Opera, Safari
@@ -20,7 +19,6 @@ function getApprovalNeededEvents() {
     xmlhttp.send();
 }
 
-// Requests the amount of unapproved events from servlet.
 function getNumOfEventsForApproval()
 {
     if (window.XMLHttpRequest) {
@@ -35,8 +33,6 @@ function getNumOfEventsForApproval()
     xmlhttp.send();
 }
 
-// Changes the checked status of all checkboxes based on the
-// checked status of the title checkbox.
 function checkAllEvents()
 {
     titleCheckbox = document.getElementById("title-checkbox"); 
@@ -50,7 +46,6 @@ function checkAllEvents()
     } 
 }
 
-// Executes a publish/delete action on a specified event.
 function executePublishAction(eventID, action)
 {
     console.log(eventID);
@@ -75,7 +70,6 @@ function executePublishAction(eventID, action)
     xmlhttp.send();
 }
 
-// Executes publish actions on all selected events.
 function publishSelected()
 {
     checkboxes = document.getElementsByTagName("input"); 
@@ -92,7 +86,6 @@ function publishSelected()
     } 
 }
 
-// Executes delete actions on all selected events.
 function deleteSelected()
 {
     checkboxes = document.getElementsByTagName("input"); 
@@ -109,12 +102,10 @@ function deleteSelected()
     } 
 }
 
-// Callback to add the HTML for the small red label on the unapproved events button
-// on the dashboard.
 function displayEventsCount()
 {
     if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-        var unapprovedCount = document.getElementById("unapprovedCount");
+        var unapprovedCount = document.getElementById("unapprovedCount");         //  text is an id of a 
         unapprovedCount.innerHTML = xmlhttp.responseText;   
     }
     else {
@@ -122,10 +113,9 @@ function displayEventsCount()
     }
 }
 
-// Callback to set the unapproved table data.
 function displayEvents() {
     if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-        var approvalNeededTable = document.getElementById("approvalNeededTable");
+        var approvalNeededTable = document.getElementById("approvalNeededTable");         //  text is an id of a 
         approvalNeededTable.innerHTML = xmlhttp.responseText;   
     }
     else {
