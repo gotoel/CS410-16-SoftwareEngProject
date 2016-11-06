@@ -8,6 +8,10 @@
         <servlet-name>GetUnpublishedEvents</servlet-name>
         <servlet-class>GetUnpublishedEvents</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RejectionSender</servlet-name>
+        <servlet-class>RejectionSender</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>GetEvents</servlet-name>
         <url-pattern>/GetEvents</url-pattern>
@@ -15,6 +19,10 @@
     <servlet-mapping>
         <servlet-name>GetUnpublishedEvents</servlet-name>
         <url-pattern>/GetUnpublishedEvents</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RejectionSender</servlet-name>
+        <url-pattern>/RejectionSender</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

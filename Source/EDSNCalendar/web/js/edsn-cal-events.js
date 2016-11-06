@@ -70,6 +70,30 @@ function executePublishAction(eventID, action)
     xmlhttp.send();
 }
 
+function sendMail(eventID)
+{
+    if (window.XMLHttpRequest){
+        xmlhttp = new XMLHttpRequest();
+    } else {
+        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    
+    var url = "RejectionSender";
+    xmlhttp.open("POST", url + "?eventID="+eventID,true);
+    xmlhttp.onreadystatechange = function()
+    {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            console.log("DONE");
+            document.getElementById("publisherResult").innerHTML = xmlhttp.responseText;
+        }
+    };
+    
+    xmlhttp.send();
+    }
+    
+    
+
+
 function publishSelected()
 {
     checkboxes = document.getElementsByTagName("input"); 

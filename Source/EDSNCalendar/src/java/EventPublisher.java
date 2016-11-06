@@ -59,6 +59,7 @@ public class EventPublisher extends HttpServlet {
                     ps.setInt(2, eventIDNum);
                 }
                 
+                
                 if(ps.executeUpdate() == 1)
                 {
                     String successOutput = "<div class=\"alert alert-success\">\n" +
