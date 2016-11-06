@@ -39,6 +39,8 @@ public class EventPublisher extends HttpServlet {
         ResultSet rs;  
         PrintWriter out = response.getWriter();
         try {
+            // Get the eventID and action out of parameters.
+            // Action is either publish or delete.
             String eventID = request.getParameter("eventID");
             String action = request.getParameter("action");
             
@@ -46,9 +48,12 @@ public class EventPublisher extends HttpServlet {
             {
                 Class.forName(DBInfo.dbDriver);
                 con= DriverManager.getConnection(DBInfo.dbURL,DBInfo.dbUsername,DBInfo.dbPass);
+                
+                // Create a statement that will update the isPublished status of the specified event.
                 ps=con.prepareStatement("UPDATE events SET isPublished=? where id=?");
                 int eventIDNum = Integer.parseInt(eventID.replaceAll("\\s+",""));
               
+                // Set the statement variables appropriately based on action.
                 if(action.equals("publish")) {
                     ps.setInt(1, 1); // 1 = published
                     ps.setInt(2, eventIDNum);
@@ -59,6 +64,7 @@ public class EventPublisher extends HttpServlet {
                     ps.setInt(2, eventIDNum);
                 }
                 
+                // Execute the update and create a little alert that states that the action succeeded.
                 if(ps.executeUpdate() == 1)
                 {
                     String successOutput = "<div class=\"alert alert-success\">\n" +
@@ -71,6 +77,7 @@ public class EventPublisher extends HttpServlet {
             }
         } catch(Exception ex)
         {
+            // In case an error occurs, an alert will be created stating the error.
             String errorOutput = "<div class=\"alert alert-error\">\n" +
                                     "<button class=\"close\" data-dismiss=\"alert\">x</button>\n" +
                                     "<strong>Error:</strong>\t\t\t" + ex.toString() +"\n" +
