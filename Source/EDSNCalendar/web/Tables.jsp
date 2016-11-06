@@ -79,6 +79,30 @@
     <h1>Events</h1>
     <div class="container-fluid">
     <hr>
+    <h5> Filter Events</h5>
+    <div id="criteria" class="row-fluid">
+        <form name="myform" action="Filter">
+        <% ResultSet rs = (ResultSet)request.getAttribute("Scriteria");%>
+        <select id="summary">
+       <option value="">Summary</option>
+         <% while(rs.next()){%>
+         <option value=<%= rs.getString("summary") %>><%= rs.getString("summary") %> </option>
+         <%}%>
+       </select>
+       <input type="hidden" id="critA" name="critA"value=""/>
+       
+       <% ResultSet rs1 = (ResultSet)request.getAttribute("Ccriteria");%>
+        <select id="category">
+       <option value="">Category</option>
+       <% while(rs1.next() && rs1.getString("Category")!= null){%>
+         <option value=<%= rs1.getString("Category") %>><%= rs1.getString("Category") %> </option>
+         <%}%>
+       </select>
+       <input type="hidden" id="critB" name="critB"value=""/>
+       <input type="submit" value="Filter" onclick="fcriteria();"> 
+        </form>
+    </div> 
+    </div>
     <div id="approvalRequired" class="row-fluid">
       <div class="span12">
        <!--
@@ -117,6 +141,7 @@
           <div class="widget-title"> <span class="icon"><i class="icon-th"></i></span>
             <h5>Events</h5>
           </div>
+            
           <div class="widget-content nopadding">
             <table class="table table-bordered data-table">
               <thead>
@@ -194,28 +219,19 @@
 <script src="js/matrix.tables.js"></script> 
 
 <script type="text/javascript">
-  // This function is called from the pop-up menus to transfer to
-  // a different page. Ignore if the value returned is a null string:
-  function goPage (newURL) {
-
-      // if url is empty, skip the menu dividers and reset the menu selection to default
-      if (newURL != "") {
-      
-          // if url is "-", it is this page -- reset the menu:
-          if (newURL == "-" ) {
-              resetMenu();            
-          } 
-          // else, send page to designated URL            
-          else {  
-            document.location.href = newURL;
-          }
-      }
-  }
-
-// resets the menu selection upon entry to this page:
-function resetMenu() {
-   document.gomenu.selector.selectedIndex = 2;
-}
+    function fcriteria(){
+        
+        var cr = document.getElementById("summary");
+        var sv = cr.options[cr.selectedIndex].value;
+        document.getElementById("critA").value=sv;
+        
+        var cr = document.getElementById("category");
+        var sv1 = cr.options[cr.selectedIndex].value;
+        //alert(sv1);
+        document.getElementById("critB").value=sv1;
+        if(!(sv===sv1===""))
+            myform.submit(); 
+    }       
 </script>
 </body>
 </html>

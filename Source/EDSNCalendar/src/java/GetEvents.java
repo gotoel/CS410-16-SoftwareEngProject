@@ -36,8 +36,8 @@ public class GetEvents extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         Connection con;
-        PreparedStatement ps;
-        ResultSet rs;      
+        PreparedStatement ps,psS;
+        ResultSet rs,rsS,rsC;      
         try 
             {
                 Class.forName(DBInfo.dbDriver);
@@ -46,7 +46,14 @@ public class GetEvents extends HttpServlet {
                 rs=ps.executeQuery();
                 
                 request.setAttribute("events",rs);
+                psS=con.prepareStatement("select * from events");
+                rsS = psS.executeQuery();
+                request.setAttribute("Scriteria",rsS); //summary
+                ps = con.prepareStatement("select * from events");
+                rsC = ps.executeQuery();
+                request.setAttribute("Ccriteria", rsC); //description
                 request.getRequestDispatcher("Tables.jsp").forward(request,response);
+                
 
             }
             catch (SQLException | ClassNotFoundException ex) 
