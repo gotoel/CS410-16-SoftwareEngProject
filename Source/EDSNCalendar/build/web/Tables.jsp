@@ -117,6 +117,30 @@
             <a href="#" class="btn btn-danger btn" onclick="deleteSelected();">Delete selected</a>
         </div>
         <hr>
+            <h5> Filter Events</h5>
+    <div id="criteria" class="row-fluid">
+        <form name="myform" action="Filter" style="padding: 5px 0 0 0;">
+        <% ResultSet rs = (ResultSet)request.getAttribute("Scriteria");%>
+        <select id="summary">
+       <option value="">Summary</option>
+         <% while(rs.next()){%>
+         <option value=<%= rs.getString("summary") %>><%= rs.getString("summary") %> </option>
+         <%}%>
+       </select>
+       <input type="hidden" id="critA" name="critA"value=""/>
+       
+       <% ResultSet rs1 = (ResultSet)request.getAttribute("Ccriteria");%>
+        <select id="category">
+       <option value="">Category</option>
+       <% while(rs1.next() && rs1.getString("Category")!= null){%>
+         <option value=<%= rs1.getString("Category") %>><%= rs1.getString("Category") %> </option>
+         <%}%>
+       </select>
+       <input type="hidden" id="critB" name="critB"value=""/>
+       <input type="submit" class="btn btn-info" value="Filter" onclick="fcriteria();" style="vertical-align: top;"> 
+        </form>
+    </div> 
+    </div>
         <div id="allEvents" class="widget-box">
           <div class="widget-title"> <span class="icon"><i class="icon-th"></i></span>
             <h5>Events</h5>
@@ -217,6 +241,21 @@
           }
       }
   }
+  
+  function fcriteria(){
+        
+        var cr = document.getElementById("summary");
+        var sv = cr.options[cr.selectedIndex].value;
+        document.getElementById("critA").value=sv;
+        
+        var cr = document.getElementById("category");
+        var sv1 = cr.options[cr.selectedIndex].value;
+        //alert(sv1);
+        document.getElementById("critB").value=sv1;
+        if(!(sv===sv1===""))
+            myform.submit(); 
+    }       
+
 
 // resets the menu selection upon entry to this page:
 function resetMenu() {
@@ -225,3 +264,4 @@ function resetMenu() {
 </script>
 </body>
 </html>
+

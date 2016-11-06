@@ -19,10 +19,11 @@ import java.sql.SQLException;
 
 /**
  *
- * @author Chris
+ * @author pc
  */
-@WebServlet(urlPatterns = {"/GetEvents"})
-public class GetEvents extends HttpServlet {
+@WebServlet(urlPatterns = {"/Filter"})
+public class Filter extends HttpServlet {
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -35,36 +36,53 @@ public class GetEvents extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        Connection con;
-        PreparedStatement ps,psS;
-        ResultSet rs,rsS,rsC;      
-        try 
-            {
-                Class.forName(DBInfo.dbDriver);
-                con= DriverManager.getConnection(DBInfo.dbURL,DBInfo.dbUsername,DBInfo.dbPass);
-                ps=con.prepareStatement("select * from events");
-                rs=ps.executeQuery();
-                
-                request.setAttribute("events",rs);
-                psS=con.prepareStatement("select * from events");
-                rsS = psS.executeQuery();
-                request.setAttribute("Scriteria",rsS); //summary
-                ps = con.prepareStatement("select * from events");
-                rsC = ps.executeQuery();
-                request.setAttribute("Ccriteria", rsC); //description
-                request.getRequestDispatcher("Tables.jsp").forward(request,response);
-                
-
+         Connection conn;
+         ResultSet rs,rsS,rsC;
+         PreparedStatement ps;
+        try (PrintWriter out = response.getWriter()) {
+            Class.forName(DBInfo.dbDriver);
+            conn= DriverManager.getConnection(DBInfo.dbURL,DBInfo.dbUsername,DBInfo.dbPass);
+            String critA = request.getParameter("critA");
+            String critB = request.getParameter("critB");
+            //crit = "pool";
+            if(!(critA.isEmpty()) || !(critB.isEmpty())){
+             if (critA.isEmpty() && !(critB.isEmpty())){
+                ps = conn.prepareStatement("Select * from events where Category=?");
+                ps.setString(1,critB);
+                rs = ps.executeQuery();
+                request.setAttribute("events", rs);
             }
-            catch (SQLException | ClassNotFoundException ex) 
+            else if(!(critA.isEmpty())&& critB.isEmpty()){
+                ps = conn.prepareStatement("Select * from events where summary like?");
+                ps.setString(1,critA + "%");
+                rs = ps.executeQuery();
+                request.setAttribute("events", rs);
+            }
+            else if(!(critA).isEmpty() && !(critB.isEmpty())){
+                ps = conn.prepareStatement("Select * from events where summary like ? and Category = ?");
+                ps.setString(1,critA + "%");
+                ps.setString(2,critB);
+                rs = ps.executeQuery();
+                request.setAttribute("events", rs);
+            }
+            
+            //rs = ps.executeQuery();
+            
+            ps = conn.prepareStatement("select * from events");
+            rsS = ps.executeQuery(); //summary
+            request.setAttribute("Scriteria", rsS);
+            ps = conn.prepareStatement("select * from events");
+            rsC = ps.executeQuery(); //category
+            request.setAttribute("Ccriteria", rsC);
+            request.getRequestDispatcher("Tables.jsp").forward(request,response);
+          }
+        }
+        
+          catch (SQLException | ClassNotFoundException ex) 
             {
                 System.out.println("Failure");
             }
-
-                
-     }
-    
-    
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -103,8 +121,6 @@ public class GetEvents extends HttpServlet {
     @Override
     public String getServletInfo() {
         return "Short description";
-    } // </editor-fold>
+    }// </editor-fold>
+
 }
-
-
-
