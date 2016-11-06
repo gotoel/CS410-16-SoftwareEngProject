@@ -1,3 +1,4 @@
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.DriverManager;
@@ -136,4 +137,7 @@ public class GetUnpublishedEvents extends HttpServlet {
         return "Short description";
     } // </editor-fold>
 }
+
+
+
 
