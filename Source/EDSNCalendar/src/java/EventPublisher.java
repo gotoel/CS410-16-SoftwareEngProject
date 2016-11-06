@@ -63,8 +63,9 @@ public class EventPublisher extends HttpServlet {
                     ps.setInt(1, 3); // 3 = silent delete (still in db, just not shown)
                     ps.setInt(2, eventIDNum);
                 }
-                
+
                 // Execute the update and create a little alert that states that the action succeeded.
+
                 if(ps.executeUpdate() == 1)
                 {
                     String successOutput = "<div class=\"alert alert-success\">\n" +

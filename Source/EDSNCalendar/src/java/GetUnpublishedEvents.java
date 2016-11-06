@@ -69,6 +69,7 @@ public class GetUnpublishedEvents extends HttpServlet {
                                       "\t\t<center>\n" +
                                           "\t\t\t<a href=\"#\" class=\"btn btn-success btn-mini\" onclick=\"executePublishAction(" + rs.getString("id") + ",\'publish\');\">Publish</a> \n" +
                                           "\t\t\t<a href=\"#\" class=\"btn btn-danger btn-mini\" onclick=\"executePublishAction(" + rs.getString("id") + ",\'delete\');\">Delete</a>\n" +
+                                          "\t\t\t<a href=\"#\" class=\"btn btn-danger btn-mini\" onclick=\"sendMail(" + rs.getString("id") + ");\">Send Rejection Notice</a>\n" +
                                       "\t\t</center>\n" +
                                   "\t</td>";
                     outString += "</tr>\n";
