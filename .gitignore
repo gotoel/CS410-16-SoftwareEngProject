@@ -1,7 +1,6 @@
-/Source/EDSNCalendar/nbproject/
-/Source/EDSNCalendar/build/
-/Source/EDSNCalendar/dist/
-/Source/EDSNCalendar/dist/
+/Source/EDSNCalendar/nbproject/**
+/Source/EDSNCalendar/build/**
+/Source/EDSNCalendar/dist/**
 nbproject/private/
 build/
 nbbuild/
