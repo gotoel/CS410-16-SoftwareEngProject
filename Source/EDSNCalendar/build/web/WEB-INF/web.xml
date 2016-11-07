@@ -12,6 +12,10 @@
         <servlet-name>RejectionSender</servlet-name>
         <servlet-class>RejectionSender</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>EventSubmit</servlet-name>
+        <servlet-class>EventSubmit</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>GetEvents</servlet-name>
         <url-pattern>/GetEvents</url-pattern>
@@ -23,6 +27,10 @@
     <servlet-mapping>
         <servlet-name>RejectionSender</servlet-name>
         <url-pattern>/RejectionSender</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EventSubmit</servlet-name>
+        <url-pattern>/EventSubmit</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
