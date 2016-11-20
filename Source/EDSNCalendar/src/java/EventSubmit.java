@@ -63,7 +63,7 @@ public class EventSubmit extends HttpServlet {
             ps.executeUpdate();
             ps.close();
             con.close();
-            response.sendRedirect("frontpage.html");
+            response.sendRedirect("frontpage.jsp");
         } catch (Exception e) {
             out.println("Exception occured " + e.getMessage());
             e.printStackTrace();

@@ -1,6 +1,6 @@
 /* ===================================================
  * bootstrap-transition.js v2.3.0
- * http://twitter.github.com/bootstrap/javascript.html#transitions
+ * http://twitter.github.com/bootstrap/javascript.jsp#transitions
  * ===================================================
  * Copyright 2012 Twitter, Inc.
  *
@@ -59,7 +59,7 @@
 
 }(window.jQuery);/* ==========================================================
  * bootstrap-alert.js v2.3.0
- * http://twitter.github.com/bootstrap/javascript.html#alerts
+ * http://twitter.github.com/bootstrap/javascript.jsp#alerts
  * ==========================================================
  * Copyright 2012 Twitter, Inc.
  *
@@ -157,7 +157,7 @@
 
 }(window.jQuery);/* ============================================================
  * bootstrap-button.js v2.3.0
- * http://twitter.github.com/bootstrap/javascript.html#buttons
+ * http://twitter.github.com/bootstrap/javascript.jsp#buttons
  * ============================================================
  * Copyright 2012 Twitter, Inc.
  *
@@ -261,7 +261,7 @@
 
 }(window.jQuery);/* ==========================================================
  * bootstrap-carousel.js v2.3.0
- * http://twitter.github.com/bootstrap/javascript.html#carousel
+ * http://twitter.github.com/bootstrap/javascript.jsp#carousel
  * ==========================================================
  * Copyright 2012 Twitter, Inc.
  *
@@ -467,7 +467,7 @@
 
 }(window.jQuery);/* =============================================================
  * bootstrap-collapse.js v2.3.0
- * http://twitter.github.com/bootstrap/javascript.html#collapse
+ * http://twitter.github.com/bootstrap/javascript.jsp#collapse
  * =============================================================
  * Copyright 2012 Twitter, Inc.
  *
@@ -633,7 +633,7 @@
 
 }(window.jQuery);/* ============================================================
  * bootstrap-dropdown.js v2.3.0
- * http://twitter.github.com/bootstrap/javascript.html#dropdowns
+ * http://twitter.github.com/bootstrap/javascript.jsp#dropdowns
  * ============================================================
  * Copyright 2012 Twitter, Inc.
  *
@@ -798,7 +798,7 @@
 }(window.jQuery);
 /* =========================================================
  * bootstrap-modal.js v2.3.0
- * http://twitter.github.com/bootstrap/javascript.html#modals
+ * http://twitter.github.com/bootstrap/javascript.jsp#modals
  * =========================================================
  * Copyright 2012 Twitter, Inc.
  *
@@ -1045,7 +1045,7 @@
 }(window.jQuery);
 /* ===========================================================
  * bootstrap-tooltip.js v2.3.0
- * http://twitter.github.com/bootstrap/javascript.html#tooltips
+ * http://twitter.github.com/bootstrap/javascript.jsp#tooltips
  * Inspired by the original jQuery.tipsy by Jason Frame
  * ===========================================================
  * Copyright 2012 Twitter, Inc.
@@ -1253,7 +1253,7 @@
       var $tip = this.tip()
         , title = this.getTitle()
 
-      $tip.find('.tooltip-inner')[this.options.html ? 'html' : 'text'](title)
+      $tip.find('.tooltip-inner')[this.options.jsp ? 'html' : 'text'](title)
       $tip.removeClass('fade in top bottom left right')
     }
 
@@ -1398,7 +1398,7 @@
 }(window.jQuery);
 /* ===========================================================
  * bootstrap-popover.js v2.3.0
- * http://twitter.github.com/bootstrap/javascript.html#popovers
+ * http://twitter.github.com/bootstrap/javascript.jsp#popovers
  * ===========================================================
  * Copyright 2012 Twitter, Inc.
  *
@@ -1441,8 +1441,8 @@
         , title = this.getTitle()
         , content = this.getContent()
 
-      $tip.find('.popover-title')[this.options.html ? 'html' : 'text'](title)
-      $tip.find('.popover-content')[this.options.html ? 'html' : 'text'](content)
+      $tip.find('.popover-title')[this.options.jsp ? 'html' : 'text'](title)
+      $tip.find('.popover-content')[this.options.jsp ? 'html' : 'text'](content)
 
       $tip.removeClass('fade top bottom left right in')
     }
@@ -1512,7 +1512,7 @@
 }(window.jQuery);
 /* =============================================================
  * bootstrap-scrollspy.js v2.3.0
- * http://twitter.github.com/bootstrap/javascript.html#scrollspy
+ * http://twitter.github.com/bootstrap/javascript.jsp#scrollspy
  * =============================================================
  * Copyright 2012 Twitter, Inc.
  *
@@ -1673,7 +1673,7 @@
 
 }(window.jQuery);/* ========================================================
  * bootstrap-tab.js v2.3.0
- * http://twitter.github.com/bootstrap/javascript.html#tabs
+ * http://twitter.github.com/bootstrap/javascript.jsp#tabs
  * ========================================================
  * Copyright 2012 Twitter, Inc.
  *
@@ -1816,7 +1816,7 @@
 
 }(window.jQuery);/* =============================================================
  * bootstrap-typeahead.js v2.3.0
- * http://twitter.github.com/bootstrap/javascript.html#typeahead
+ * http://twitter.github.com/bootstrap/javascript.jsp#typeahead
  * =============================================================
  * Copyright 2012 Twitter, Inc.
  *
@@ -1955,12 +1955,12 @@
 
       items = $(items).map(function (i, item) {
         i = $(that.options.item).attr('data-value', item)
-        i.find('a').html(that.highlighter(item))
+        i.find('a').jsp(that.highlighter(item))
         return i[0]
       })
 
       items.first().addClass('active')
-      this.$menu.html(items)
+      this.$menu.jsp(items)
       return this
     }
 
@@ -2151,7 +2151,7 @@
 }(window.jQuery);
 /* ==========================================================
  * bootstrap-affix.js v2.3.0
- * http://twitter.github.com/bootstrap/javascript.html#affix
+ * http://twitter.github.com/bootstrap/javascript.jsp#affix
  * ==========================================================
  * Copyright 2012 Twitter, Inc.
  *

@@ -237,7 +237,7 @@
 				html += '<span class="year'+(i === -1 || i === 10 ? ' old' : '')+(currentYear === year ? ' active' : '')+'">'+year+'</span>';
 				year += 1;
 			}
-			yearCont.html(html);
+			yearCont.jsp(html);
 		},
 		
 		click: function(e) {

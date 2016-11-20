@@ -84,7 +84,7 @@
             var size = (options && options.size) ? ' btn-'+options.size : '';
             return "<li>" +
               "<div class='btn-group'>" + 
-                "<a class='btn" + size + "' data-wysihtml5-action='change_view' title='" + locale.html.edit + "'><i class='icon-pencil'></i></a>" +
+                "<a class='btn" + size + "' data-wysihtml5-action='change_view' title='" + locale.jsp.edit + "'><i class='icon-pencil'></i></a>" +
               "</div>" +
             "</li>";
         },
@@ -199,13 +199,13 @@
             toolbar.find("a[data-wysihtml5-command='formatBlock']").click(function(e) {
                 var target = e.target || e.srcElement;
                 var el = $(target);
-                self.toolbar.find('.current-font').text(el.html());
+                self.toolbar.find('.current-font').text(el.jsp());
             });
 
             toolbar.find("a[data-wysihtml5-command='foreColor']").click(function(e) {
                 var target = e.target || e.srcElement;
                 var el = $(target);
-                self.toolbar.find('.current-color').text(el.html());
+                self.toolbar.find('.current-color').text(el.jsp());
             });
 
             this.el.before(toolbar);

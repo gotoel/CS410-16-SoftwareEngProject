@@ -523,7 +523,7 @@ rangy.createModule("DomUtil", function(api, module) {
     }
 
     function comparePoints(nodeA, offsetA, nodeB, offsetB) {
-        // See http://www.w3.org/TR/DOM-Level-2-Traversal-Range/ranges.html#Level-2-Range-Comparing
+        // See http://www.w3.org/TR/DOM-Level-2-Traversal-Range/ranges.jsp#Level-2-Range-Comparing
         var nodeC, root, childA, childB, n;
         if (nodeA == nodeB) {
 
@@ -1134,13 +1134,13 @@ rangy.createModule("DomUtil", function(api, module) {
         // IE 6 and 7 throw
     }
 
-    api.features.htmlParsingConforms = htmlParsingConforms;
+    api.features.jspParsingConforms = htmlParsingConforms;
 
     var createContextualFragment = htmlParsingConforms ?
 
         // Implementation as per HTML parsing spec, trusting in the browser's implementation of innerHTML. See
         // discussion and base code for this implementation at issue 67.
-        // Spec: http://html5.org/specs/dom-parsing.html#extensions-to-the-range-interface
+        // Spec: http://html5.org/specs/dom-parsing.jsp#extensions-to-the-range-interface
         // Thanks to Aleks Williams.
         function(fragmentStr) {
             // "Let node the context object's start's node."
@@ -2456,7 +2456,7 @@ rangy.createModule("DomUtil", function(api, module) {
     });
 });rangy.createModule("WrappedSelection", function(api, module) {
     // This will create a selection object wrapper that follows the Selection object found in the WHATWG draft DOM Range
-    // spec (http://html5.org/specs/dom-range.html)
+    // spec (http://html5.org/specs/dom-range.jsp)
 
     api.requireModules( ["DomUtil", "DomRange", "WrappedRange"] );
 
@@ -4373,7 +4373,7 @@ wysihtml5.dom.getAsDom = (function() {
   
   /**
    * List of html5 tags
-   * taken from http://simon.html5.org/html5-elements
+   * taken from http://simon.jsp5.org/html5-elements
    */
   var HTML5_ELEMENTS = [
     "abbr", "article", "aside", "audio", "bdi", "canvas", "command", "datalist", "details", "figcaption",
@@ -6745,7 +6745,7 @@ wysihtml5.quirks.cleanPastedHTML = (function() {
     }
   };
 
-  wysihtml5.selection.HTMLApplier = HTMLApplier;
+  wysihtml5.selection.jspApplier = HTMLApplier;
   
 })(wysihtml5, rangy);/**
  * Rich Text Query/Formatting Commands
@@ -7302,7 +7302,7 @@ wysihtml5.Commands = Base.extend(
   function _getApplier(tagName, className, classRegExp) {
     var identifier = tagName + ":" + className;
     if (!htmlApplier[identifier]) {
-      htmlApplier[identifier] = new wysihtml5.selection.HTMLApplier(_getTagNames(tagName), className, classRegExp, true);
+      htmlApplier[identifier] = new wysihtml5.selection.jspApplier(_getTagNames(tagName), className, classRegExp, true);
     }
     return htmlApplier[identifier];
   }
@@ -7698,7 +7698,7 @@ wysihtml5.Commands = Base.extend(
   };
 })(wysihtml5);/**
  * Undo Manager for wysihtml5
- * slightly inspired by http://rniwa.com/editing/undomanager.html#the-undomanager-interface
+ * slightly inspired by http://rniwa.com/editing/undomanager.jsp#the-undomanager-interface
  */
 (function(wysihtml5) {
   var Z_KEY               = 90,
@@ -8972,7 +8972,7 @@ wysihtml5.views.Textarea = wysihtml5.views.View.extend(
  * http://stackoverflow.com/questions/4361826/does-chrome-have-buil-in-speech-recognition-for-input-type-text-x-webkit-speec
  *
  * Current HTML5 draft can be found here
- * http://lists.w3.org/Archives/Public/public-xg-htmlspeech/2011Feb/att-0020/api-draft.html
+ * http://lists.w3.org/Archives/Public/public-xg-htmlspeech/2011Feb/att-0020/api-draft.jsp
  * 
  * "Accessing Google Speech API Chrome 11"
  * http://mikepultz.com/2011/03/accessing-google-speech-api-chrome-11/

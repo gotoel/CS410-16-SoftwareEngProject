@@ -1,3 +1,4 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
@@ -39,7 +40,7 @@
               <label class="control-label">Select input</label>
               <div class="controls">
                 <div class="select2-container" id="s2id_autogen1">    
-                    <a href="http://themedesigner.in/demo/matrix-admin/form-common.html#" onclick="return false;" class="select2-choice" tabindex="0">   
+                    <a href="http://themedesigner.in/demo/matrix-admin/form-common.jsp#" onclick="return false;" class="select2-choice" tabindex="0">   
                         <span>First option</span>
                         <abbr class="select2-search-choice-close" style="display:none;"></abbr>   
                         <div><b></b></div></a><div class="select2-drop select2-with-searchbox select2-offscreen" style="display: block;">   

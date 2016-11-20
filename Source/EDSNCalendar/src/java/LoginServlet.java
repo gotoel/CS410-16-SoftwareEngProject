@@ -28,7 +28,7 @@ public class LoginServlet extends HttpServlet {
     /*
     
     Processes a login request.
-    Acess levels:
+    Access levels:
     0 - No access.
     1 - View access
     2 - View and some editing access (ability to edit events)
@@ -112,7 +112,7 @@ public class LoginServlet extends HttpServlet {
                     session.setAttribute("access_level", accessLevel);
 
                     // Forward user to the dashboard. May need to make JSP for more control later.
-                    request.getRequestDispatcher("/index.html").forward(request, response);
+                    request.getRequestDispatcher("/index.jsp").forward(request, response);
                 }
                 else
                 {

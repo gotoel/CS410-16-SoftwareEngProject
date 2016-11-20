@@ -19,7 +19,7 @@
 
 <!--Header-part-->
 <div id="header">
-  <h1><a href="events.html">EDSN Calendar - Events</a></h1>
+  <h1><a href="events.jsp">EDSN Calendar - Events</a></h1>
 </div>
 <!--close-Header-part--> 
 
@@ -33,7 +33,7 @@
         <li class="divider"></li>
         <li><a href="#"><i class="icon-check"></i> My Tasks</a></li>
         <li class="divider"></li>
-        <li><a href="login.html"><i class="icon-key"></i> Log Out</a></li>
+        <li><a href="login.jsp"><i class="icon-key"></i> Log Out</a></li>
       </ul>
     </li>
     <li class="dropdown" id="menu-messages"><a href="#" data-toggle="dropdown" data-target="#menu-messages" class="dropdown-toggle"><i class="icon icon-envelope"></i> <span class="text">Messages</span> <span class="label label-important">5</span> <b class="caret"></b></a>
@@ -48,7 +48,7 @@
       </ul>
     </li>
     <li class=""><a title="" href="#"><i class="icon icon-cog"></i> <span class="text">Settings</span></a></li>
-    <li class=""><a title="" href="login.html"><i class="icon icon-share-alt"></i> <span class="text">Logout</span></a></li>
+    <li class=""><a title="" href="login.jsp"><i class="icon icon-share-alt"></i> <span class="text">Logout</span></a></li>
   </ul>
 </div>
 <!--close-top-Header-menu-->
@@ -61,12 +61,12 @@
 <!--sidebar-menu-->
 <div id="sidebar"><a href="#" class="visible-phone"><i class="icon icon-home"></i> Dashboard</a>
   <ul>
-    <li><a href="index.html"><i class="icon icon-home"></i> <span>Dashboard</span></a> </li>
+    <li><a href="index.jsp"><i class="icon icon-home"></i> <span>Dashboard</span></a> </li>
     <li class="active"> <a href="GetEvents"><i class="icon icon-list-alt"></i> <span>Events</span></a> </li>
-    <li> <a href="organize.html"><i class="icon icon-tags"></i> <span>Organize</span></a> </li>
-    <li><a href="settings.html"><i class="icon icon-wrench"></i> <span>Settings</span></a></li>
-    <li><a href="users.html"><i class="icon icon-user"></i> <span>Users</span></a></li>
-    <li><a href="widgetcreator.html"><i class="icon icon-pencil"></i> <span>Widget Creator</span></a></li>
+    <li> <a href="organize.jsp"><i class="icon icon-tags"></i> <span>Organize</span></a> </li>
+    <li><a href="settings.jsp"><i class="icon icon-wrench"></i> <span>Settings</span></a></li>
+    <li><a href="users.jsp"><i class="icon icon-user"></i> <span>Users</span></a></li>
+    <li><a href="widgetcreator.jsp"><i class="icon icon-pencil"></i> <span>Widget Creator</span></a></li>
   </ul>
 </div>
 <!--sidebar-menu-->
@@ -75,7 +75,7 @@
 <div id="content">
 <!--breadcrumbs-->
   <div id="content-header">
-    <div id="breadcrumb"> <a href="index.html" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#">Events</a> </div>
+    <div id="breadcrumb"> <a href="index.jsp" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#">Events</a> </div>
     <h1>Events</h1>
     <div class="container-fluid">
     <hr>

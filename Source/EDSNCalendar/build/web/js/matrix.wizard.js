@@ -8,8 +8,8 @@ $(document).ready(function(){
 		disableUIStyles : true,
 	
 		formOptions :{
-			success: function(data){$("#status").fadeTo(500,1,function(){ $(this).html("<span>Form was submitted!</span>").fadeTo(5000, 0); })},
-			beforeSubmit: function(data){$("#submitted").html("<span>Form was submitted with ajax. Data sent to the server: " + $.param(data) + "</span>");},
+			success: function(data){$("#status").fadeTo(500,1,function(){ $(this).jsp("<span>Form was submitted!</span>").fadeTo(5000, 0); })},
+			beforeSubmit: function(data){$("#submitted").jsp("<span>Form was submitted with ajax. Data sent to the server: " + $.param(data) + "</span>");},
 			dataType: 'json',
 			resetForm: true
 		},

@@ -97,7 +97,7 @@ Enjoy!
       
       btnText = btnText == "" ? $el.is(":reset") ? "Reset" : "Submit" : btnText;
       
-      spanTag.html(btnText);
+      spanTag.jsp(btnText);
       
       $el.css("opacity", 0);
       $el.wrap(divTag);
@@ -170,7 +170,7 @@ Enjoy!
       if(selected.length == 0){
         selected = elem.find("option:first");
       }
-      spanTag.html(selected.html());
+      spanTag.jsp(selected.jsp());
       
       elem.css('opacity', 0);
       elem.wrap(divTag);
@@ -182,7 +182,7 @@ Enjoy!
 
       elem.bind({
         "change.uniform": function() {
-          spanTag.text(elem.find(":selected").html());
+          spanTag.text(elem.find(":selected").jsp());
           divTag.removeClass(options.activeClass);
         },
         "focus.uniform": function() {
@@ -209,7 +209,7 @@ Enjoy!
           divTag.removeClass(options.activeClass);
         },
         "keyup.uniform": function(){
-          spanTag.text(elem.find(":selected").html());
+          spanTag.text(elem.find(":selected").jsp());
         }
       });
       
@@ -566,7 +566,7 @@ Enjoy!
           divTag.removeClass(options.hoverClass+" "+options.focusClass+" "+options.activeClass);
 
           //reset current selected text
-          spanTag.html($e.find(":selected").html());
+          spanTag.jsp($e.find(":selected").jsp());
 
           if($e.is(":disabled")){
             divTag.addClass(options.disabledClass);

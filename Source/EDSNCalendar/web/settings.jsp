@@ -1,7 +1,8 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>EDSN Calendar</title>
+<title>EDSN Calendar - Settings</title>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link rel="stylesheet" href="css/bootstrap.min.css" />
@@ -17,7 +18,7 @@
 
 <!--Header-part-->
 <div id="header">
-  <h1><a href="dashboard.html">Matrix Admin</a></h1>
+  <h1><a href="dashboard.jsp">Matrix Admin</a></h1>
 </div>
 <!--close-Header-part--> 
 
@@ -31,7 +32,7 @@
         <li class="divider"></li>
         <li><a href="#"><i class="icon-check"></i> My Tasks</a></li>
         <li class="divider"></li>
-        <li><a href="login.html"><i class="icon-key"></i> Log Out</a></li>
+        <li><a href="login.jsp"><i class="icon-key"></i> Log Out</a></li>
       </ul>
     </li>
     <li class="dropdown" id="menu-messages"><a href="#" data-toggle="dropdown" data-target="#menu-messages" class="dropdown-toggle"><i class="icon icon-envelope"></i> <span class="text">Messages</span> <span class="label label-important">5</span> <b class="caret"></b></a>
@@ -46,7 +47,7 @@
       </ul>
     </li>
     <li class=""><a title="" href="#"><i class="icon icon-cog"></i> <span class="text">Settings</span></a></li>
-    <li class=""><a title="" href="login.html"><i class="icon icon-share-alt"></i> <span class="text">Logout</span></a></li>
+    <li class=""><a title="" href="login.jsp"><i class="icon icon-share-alt"></i> <span class="text">Logout</span></a></li>
   </ul>
 </div>
 <!--close-top-Header-menu-->
@@ -59,12 +60,12 @@
 <!--sidebar-menu-->
 <div id="sidebar"><a href="#" class="visible-phone"><i class="icon icon-home"></i> Dashboard</a>
   <ul>
-    <li class="active"><a href="index.html"><i class="icon icon-home"></i> <span>Dashboard</span></a> </li>
+    <li><a href="index.jsp"><i class="icon icon-home"></i> <span>Dashboard</span></a> </li>
     <li> <a href="GetEvents"><i class="icon icon-list-alt"></i> <span>Events</span></a> </li>
-    <li> <a href="organize.html"><i class="icon icon-tags"></i> <span>Organize</span></a> </li>
-    <li><a href="settings.html"><i class="icon icon-wrench"></i> <span>Settings</span></a></li>
-    <li><a href="users.html"><i class="icon icon-user"></i> <span>Users</span></a></li>
-    <li><a href="widgetcreator.html"><i class="icon icon-pencil"></i> <span>Widget Creator</span></a></li>
+    <li> <a href="organize.jsp"><i class="icon icon-tags"></i> <span>Organize</span></a> </li>
+    <li class="active"><a href="settings.jsp"><i class="icon icon-wrench"></i> <span>Settings</span></a></li>
+    <li><a href="users.jsp"><i class="icon icon-user"></i> <span>Users</span></a></li>
+    <li><a href="widgetcreator.jsp"><i class="icon icon-pencil"></i> <span>Widget Creator</span></a></li>
   </ul>
 </div>
 <!--sidebar-menu-->
@@ -73,23 +74,15 @@
 <div id="content">
 <!--breadcrumbs-->
   <div id="content-header">
-    <div id="breadcrumb"> <a href="index.html" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a></div>
+        <div id="breadcrumb"> <a href="index.jsp" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#">Settings</a> </div>
+    <h1>Settings</h1>
   </div>
 <!--End-breadcrumbs-->
 
 <!--Action boxes-->
-  <div class="container-fluid">
-    <div class="quick-actions_homepage">
-      <ul class="quick-actions">
-        <li class="bg_lb"> <a href="index.html"> <i class="icon-dashboard"></i> Dashboard </a> </li>
-        <li class="bg_lg span3"> <a href=GetEvents> <i class="icon-list-alt"></i> Events</a> </li>
-        <div><li class="bg_ly span3"> <a href="GetEvents"> <i class="icon-inbox"></i> <div id="unapprovedCount"></div> Events waiting for approval </a> </li>
-        <li class="bg_lo"> <a href="organize.html"> <i class="icon-tags"></i> Organize</a> </li>
-        <li class="bg_ls"> <a href="settings.html"> <i class="icon-wrench"></i> Settings</a> </li>
-        <li class="bg_lo span3"> <a href="users.html"> <i class="icon-user"></i> Users</a> </li>
-        <li class="bg_lb"> <a href="widgetcreator.html"> <i class="icon-pencil"></i> Widget Creator</a> </li>
-      </ul>
-    </div>
+
+<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@PAGE CODE GOES HERE@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+
 <!--End-Action boxes-->    
 
 
@@ -120,10 +113,8 @@
 <script src="js/matrix.popover.js"></script> 
 <script src="js/jquery.dataTables.min.js"></script> 
 <script src="js/matrix.tables.js"></script> 
-<script src="js/edsn-cal-events.js"/></script>
 
 <script type="text/javascript">
-  getNumOfEventsForApproval();
   // This function is called from the pop-up menus to transfer to
   // a different page. Ignore if the value returned is a null string:
   function goPage (newURL) {
