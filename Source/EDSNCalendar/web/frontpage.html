@@ -19,12 +19,13 @@ and open the template in the editor.
   <div class="align">
     <img src="img/edsnlogo.jpg">   
   </div>    
-  <div id="myCalendar" class="align">
-    <iframe src="https://calendar.google.com/calendar/embed?height=600&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=l0u6k0e8s4i26sgpoh68g9e2io%40group.calendar.google.com&amp;color=%235F6B02&amp;ctz=America%2FNew_York" style="border-width:0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+    <!--<a href="CalendarInsert"><i class="icon icon-list-alt"></i> <span>Debug event insertion</span></a>-->
+  <div id="myCalendar" class="align" >
+      <iframe src="https://calendar.google.com/calendar/embed?height=900&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=l0u6k0e8s4i26sgpoh68g9e2io%40group.calendar.google.com&amp;color=%235F6B02&amp;ctz=America%2FNew_York" style="border-width:0" width="1600" height="900" frameborder="0" scrolling="no"></iframe>
   </div>
   <div class="container">
     <div class="align">
-      <button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#myModal">
+      <button type="button" class="btn btn-primary btn-md paddin" data-toggle="modal" data-target="#myModal">
       <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> ADD EVENT</button>
     </div>
       <div class="modal fade" id="myModal" role="dialog">
@@ -56,7 +57,7 @@ and open the template in the editor.
                   </tr>
                 </table>
                   <textarea name="description" class="form-control margins" placeholder="Description (required - 100 character limit)" maxlength="100"></textarea>
-                  <div class="modal-footer">
+                  <div class="modal-footer">              
                     <button type="submit" class="btn btn-primary btn-block">Submit</button>
                   </div>
               </form>
