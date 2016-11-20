@@ -13,6 +13,9 @@
 
     </head>
     <body>
+        <!-- try to clear attributes, this is bad. -->
+        <%request.getSession().setAttribute("username", "");%> 
+        <%request.getSession().setAttribute("access_level", "");%> 
         <div id="loginbox">            
             <form id="loginform" class="form-vertical" action="LoginServlet" method="POST" name="password_validate" novalidate="novalidate">
                 <div class="control-group normal_text"> <h3><img src="img/logo.png" alt="Logo" /></h3></div>
