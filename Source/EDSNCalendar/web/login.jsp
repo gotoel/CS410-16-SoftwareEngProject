@@ -1,3 +1,4 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
     
@@ -12,10 +13,17 @@
 
     </head>
     <body>
-        ${msgHTML}
         <div id="loginbox">            
             <form id="loginform" class="form-vertical" action="LoginServlet" method="POST" name="password_validate" novalidate="novalidate">
-				 <div class="control-group normal_text"> <h3><img src="img/logo.png" alt="Logo" /></h3></div>
+                <div class="control-group normal_text"> <h3><img src="img/logo.png" alt="Logo" /></h3></div>
+                <div class="control-group">
+                    <div class="controls">
+                        <div class="main_input_box">
+                            <!-- this is terrible -->
+                            <%=((String)request.getAttribute("msgHTML")) == null ? "" : (String)request.getAttribute("msgHTML")%>  
+                        </div>
+                    </div>
+                </div>
                 <div class="control-group">
                     <div class="controls">
                         <div class="main_input_box">
