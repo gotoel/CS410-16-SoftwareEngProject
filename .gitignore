@@ -1,7 +1,7 @@
-/Source/EDSNCalendar/nbproject/**
-/Source/EDSNCalendar/build/**
-/Source/EDSNCalendar/dist/**
-nbproject/private/
+Source/EDSNCalendar/nbproject/**
+Source/EDSNCalendar/build/**
+Source/EDSNCalendar/dist/**
+nbproject/private/**
 build/
 nbbuild/
 dist/
@@ -13,7 +13,6 @@ nbdist/
 .mtj.tmp/
 
 # Package Files #
-*.jar
 *.war
 *.ear
 
