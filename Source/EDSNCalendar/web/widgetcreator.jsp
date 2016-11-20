@@ -16,7 +16,8 @@
 </head>
 <body>
     <%
-        if(((String)request.getSession().getAttribute("username")).isEmpty())
+        if(request.getSession().getAttribute("username") == null ||
+                ((String)request.getSession().getAttribute("username")).isEmpty())
         {
             response.sendRedirect("login.jsp");
         }
