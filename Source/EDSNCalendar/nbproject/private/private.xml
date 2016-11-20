@@ -3,12 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Chris/Desktop/My%20Stuff/Git/CS410-16-SoftwareEngProject/Source/EDSNCalendar/web/frontpage.html</file>
             <file>file:/C:/Users/Chris/Desktop/My%20Stuff/Git/CS410-16-SoftwareEngProject/Source/EDSNCalendar/src/java/CalendarInsert.java</file>
-            <file>file:/C:/Users/Chris/Desktop/My%20Stuff/Git/CS410-16-SoftwareEngProject/Source/EDSNCalendar/src/java/DBInfo.java</file>
-            <file>file:/C:/Users/Chris/Desktop/My%20Stuff/Git/CS410-16-SoftwareEngProject/Source/EDSNCalendar/src/java/GetEvents.java</file>
-            <file>file:/C:/Users/Chris/Desktop/My%20Stuff/Git/CS410-16-SoftwareEngProject/Source/EDSNCalendar/web/index.html</file>
-            <file>file:/C:/Users/Chris/Desktop/My%20Stuff/Git/CS410-16-SoftwareEngProject/Source/EDSNCalendar/src/java/EventSubmit.java</file>
+            <file>file:/C:/Users/Chris/Desktop/My%20Stuff/Git/CS410-16-SoftwareEngProject/Source/EDSNCalendar/src/java/EventPublisher.java</file>
         </group>
     </open-files>
 </project-private>
