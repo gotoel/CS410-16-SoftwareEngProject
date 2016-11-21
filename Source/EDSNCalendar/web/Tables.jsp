@@ -71,7 +71,7 @@
     <li class="active"> <a href="GetEvents"><i class="icon icon-list-alt"></i> <span>Events</span></a> </li>
     <li> <a href="organize.jsp"><i class="icon icon-tags"></i> <span>Organize</span></a> </li>
     <li><a href="settings.jsp"><i class="icon icon-wrench"></i> <span>Settings</span></a></li>
-    <li><a href="users.jsp"><i class="icon icon-user"></i> <span>Users</span></a></li>
+    <li><a href="GetUsers"><i class="icon icon-user"></i> <span>Users</span></a></li>
     <li><a href="widgetcreator.jsp"><i class="icon icon-pencil"></i> <span>Widget Creator</span></a></li>
   </ul>
 </div>
