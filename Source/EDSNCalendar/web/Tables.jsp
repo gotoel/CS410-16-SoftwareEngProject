@@ -29,15 +29,17 @@
     overflow: auto; /* Enable scroll if needed */
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    /*text-align:center;*/
     }
-
+ 
 .modal-content {
     background-color: #fefefe;
+    /*text-align:center;*/
     color:black;
     margin: auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 70%;
+    width: 45%;
 }
 .close {
     color: #aaaaaa;
@@ -221,11 +223,12 @@
                               <td> <center><%= resultSet.getString("colorId") %></center></td>
                               <td> <center><%= resultSet.getString("isPublished") %></center></td>
                               <td>
-                                  <button type="button" onclick="fopen("1")" id="myBtn"> Detail</button>
-                              </td>
+                                 <button type="button" onclick="fopen(<%= resultSet.getString("id") %>)" id="myBtn"> Detail</button>
+                             </td>
                           </tr>
-                      <%}%>
+                     
               </tbody>
+               <%}%>
             </table>
           </div>
         </div>
@@ -235,32 +238,33 @@
 
 
   <div id="myModal" class="modal">
-    <!-- Modal content -->
-    <div class="modal-content">
-      <span class="close">×</span>
-      <center><h2>Detailed Event View</h2></center>
-      <form action="EventSubmit" method="POST">
-                  <table>
-                    <tr>
-                      <td class="align"><label>Start Date/Time:</label></td>
-                      <td><input type="date" class="form-control margins" id="startdate"></td>
-                      <td><input type="time" class="form-control margins" id="starttime"></td>
-                    </tr>
-                    <tr>
-                      <td class="align"><label>End Date/Time:</label></td>
-                      <td><input type="date" class="form-control margins" id="enddate"></td>
-                      <td><input type="time" class="form-control margins" id="endtime"></td>
-                    </tr>
-                  </table>
-                    <input type="text" class="form-control margins" placeholder="Summary" id="summary" maxlength="20" style="width:530px"><br>
-                    <textarea id="description" class="form-control margins" placeholder="Description (required - 100 character limit)" maxlength="100" style="width:530px"></textarea>
-                     <input type="text" class="form-control margins" id="location" maxlength="20" style="width:530px"><br>
-                    <div class="modal-footer">
-                      <button type="submit" class="btn btn-primary btn-block">Submit</button>
-                    </div>
-                </form>
-    </div>
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">×</span>
+    <center><h2>Detailed Event View</h2></center>
+    <form name="dform" action="submitback" >
+                <table>
+                  <tr>
+                  <input type="hidden" id="anID" name="anID">
+                    <td class="align"><label>Start Date/Time:</label></td>
+                    <td><input type="date" class="form-control margins" id="startdate" name="startdate"></td>
+                    <td><input type="time" class="form-control margins" id="starttime" name="starttime"></td>
+                  </tr>
+                  <tr>
+                    <td class="align"><label>End Date/Time:</label></td>
+                    <td><input type="date" class="form-control margins" id="enddate" name="enddate"></td>
+                    <td><input type="time" class="form-control margins" id="endtime" name="endtime"></td>
+                  </tr>
+                </table>
+                  <input type="text" class="form-control margins" placeholder="Summary" name="summaryA"id="summaryA" maxlength="20" style="width:530px"><br>
+                  <textarea id="description" name="description"class="form-control margins" placeholder="Description (required - 100 character limit)" maxlength="100" style="width:530px"></textarea>
+                   <input type="text" class="form-control margins" id="location" name="location"placeholder="Location" maxlength="20" style="width:530px"><br>
+                  <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                  </div>
+              </form>
   </div>
+</div>
 
 
 
@@ -337,27 +341,73 @@
     }
 
 
-    function fopen(thedate,thetime){
-        //var date = document.getElementById("dd").value
-      //document.getElementById("startdate").value = thedate;
-      //document.getElementById("starttime").value = thetime; 
-     var modal = document.getElementById('myModal');
-     var span = document.getElementsByClassName("close")[0];
-    modal.style.display = "block";
-    // When the user clicks on <span> (x), close the modal
-    span.onclick = function() {
-    modal.style.display = "none";
-    }
-
+    function fopen(theid){
+          //var date = document.getElementById("dd").value 
+        document.getElementById("startdate").value = theid; 
+        //document.getElementById("starttime").value = thetime; 
+        if(window.XMLHttpRequest){
+                    xmlhttp = new XMLHttpRequest();
+                  }
+                else{
+                    xmlhttp = new ActiveXObject(Microsoft.XMLHTTP);}
+                 var url = "detailinfo?id=" + theid;
+                 xmlhttp.open("GET",url, true);
+                 xmlhttp.onreadystatechange = update;
+                 xmlhttp.send();   }
+       function update() {
+        if (xmlhttp.readyState == 4) {
+                if (xmlhttp.status == 200) {
+                    var rootNode=xmlhttp.responseXML.documentElement;
+                    //start date
+                    var startdateNode = rootNode.getElementsByTagName("startdate");
+                    var startdate = startdateNode[0].firstChild.nodeValue;
+                    document.getElementById("startdate").value=startdate;
+                    //start time
+                    var starttimeNode = rootNode.getElementsByTagName("starttime");
+                    var starttime = starttimeNode[0].firstChild.nodeValue;
+                    document.getElementById("starttime").value = starttime;
+                    //end date
+                    var enddateNode = rootNode.getElementsByTagName("enddate");
+                    var enddate = enddateNode[0].firstChild.nodeValue;
+                    document.getElementById("enddate").value=enddate;
+                    //end time
+                    var endtimeNode = rootNode.getElementsByTagName("endtime");
+                    var endtime = endtimeNode[0].firstChild.nodeValue;
+                    document.getElementById("endtime").value = endtime;
+                    //summary
+                    var summaryNode = rootNode.getElementsByTagName("summary");
+                    var summary = summaryNode[0].firstChild.nodeValue;
+                    //alert(summary);
+                    document.getElementById("summaryA").value = summary;
+                    //description
+                    var descriptionNode = rootNode.getElementsByTagName("description");
+                    var description = descriptionNode[0].firstChild.nodeValue;
+                    document.getElementById("description").value = description;
+                    //location
+                    var locationNode = rootNode.getElementsByTagName("location");
+                    var location = locationNode[0].firstChild.nodeValue;
+                    document.getElementById("location").value = location;
+                    //id
+                    var idNode = rootNode.getElementsByTagName("id");
+                    var id = idNode[0].firstChild.nodeValue;
+                    //alert(id);
+                    document.getElementById("anID").value = id;
+           var modal = document.getElementById('myModal');
+           var span = document.getElementsByClassName("close")[0];
+         modal.style.display = "block";
+         // When the user clicks on <span> (x), close the modal
+         span.onclick = function() {
+        modal.style.display = "none";
+        }
     // When the user clicks anywhere outside of the modal, close it
     window.onclick = function(event) {
-    if (event.target == modal) {
-      modal.style.display = "none";
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+       }   
+  }  
     }
-    }
-
-    }
-
+  }
 
 // resets the menu selection upon entry to this page:
 function resetMenu() {
