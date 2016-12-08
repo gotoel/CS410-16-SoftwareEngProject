@@ -185,9 +185,11 @@
        </select>
        <input type="hidden" id="critB" name="critB"value=""/>
        <input type="submit" class="btn btn-info" value="Filter" onclick="fcriteria();" style="vertical-align: top;">
+       <a href="GetEvents"><button type="button"  class="btn btn-info"style="background-color:red; vertical-align: top; margin-left:10px;"> Cancel </button> </a>
         </form>
+        
     </div>
-    </div>
+    </div> 
         <div id="allEvents" class="widget-box">
           <div class="widget-title"> <span class="icon"><i class="icon-th"></i></span>
             <h5>Events</h5>
@@ -239,10 +241,10 @@
 
   <div id="myModal" class="modal">
   <!-- Modal content -->
-  <div class="modal-content">
+  <div class="modal-content" style="background-color:#b3daff">
     <span class="close">×</span>
     <center><h2>Detailed Event View</h2></center>
-    <form name="dform" action="submitback" >
+    <form name="dform" action="submitback" \>
                 <table>
                   <tr>
                   <input type="hidden" id="anID" name="anID">
@@ -256,10 +258,10 @@
                     <td><input type="time" class="form-control margins" id="endtime" name="endtime"></td>
                   </tr>
                 </table>
-                  <input type="text" class="form-control margins" placeholder="Summary" name="summaryA"id="summaryA" maxlength="20" style="width:530px"><br>
-                  <textarea id="description" name="description"class="form-control margins" placeholder="Description (required - 100 character limit)" maxlength="100" style="width:530px"></textarea>
-                   <input type="text" class="form-control margins" id="location" name="location"placeholder="Location" maxlength="20" style="width:530px"><br>
-                  <div class="modal-footer">
+                  <input type="text" class="form-control margins" placeholder="Summary" name="summaryA"id="summaryA" maxlength="20" style="width:530px; margin-left:18px;"><br>
+                  <textarea id="description" name="description"class="form-control margins" placeholder="Description (required - 100 character limit)" maxlength="100" style="width:530px; margin-left:18px;"></textarea>
+                   <input type="text" class="form-control margins" id="location" name="location"placeholder="Location" maxlength="20" style="width:530px; margin-left:18px;"><br>
+                  <div class="modal-footer" style="background-color:#b3daff">
                     <button type="submit" class="btn btn-primary btn-block">Submit</button>
                   </div>
               </form>
@@ -336,7 +338,7 @@
         var sv1 = cr.options[cr.selectedIndex].value;
         //alert(sv1);
         document.getElementById("critB").value=sv1;
-        if(!(sv===sv1===""))
+        if(!(sv==="" && sv1===""))
             myform.submit();
     }
 
