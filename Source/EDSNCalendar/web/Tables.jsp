@@ -185,7 +185,7 @@
        </select>
        <input type="hidden" id="critB" name="critB"value=""/>
        <input type="submit" class="btn btn-info" value="Filter" onclick="fcriteria();" style="vertical-align: top;">
-       <a href="GetEvents"><button type="button"  class="btn btn-info"style="background-color:red; vertical-align: top; margin-left:10px;"> Cancel </button> </a>
+       <a href="GetEvents"><button type="button"  class="btn btn-info"style="vertical-align: top; margin-left:10px;"> Cancel </button> </a>
         </form>
         
     </div>
