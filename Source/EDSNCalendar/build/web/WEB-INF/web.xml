@@ -23,6 +23,14 @@
         <servlet-name>CalendarInsert</servlet-name>
         <servlet-class>CalendarInsert</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>GetUsers</servlet-name>
+        <servlet-class>GetUsers</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UserInsert</servlet-name>
+        <servlet-class>UserInsert</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>GetEvents</servlet-name>
         <url-pattern>/GetEvents</url-pattern>
@@ -42,6 +50,14 @@
     <servlet-mapping>
         <servlet-name>CalendarInsert</servlet-name>
         <url-pattern>/CalendarInsert</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetUsers</servlet-name>
+        <url-pattern>/GetUsers</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserInsert</servlet-name>
+        <url-pattern>/UserInsert</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
