@@ -14,6 +14,47 @@
 <link href="font-awesome/css/font-awesome.css" rel="stylesheet" />
 <link rel="stylesheet" href="css/jquery.gritter.css" />
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>
+
+<style>
+    .modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    margin:auto;
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    /*text-align:center;*/
+    }
+ 
+.modal-content {
+    background-color: #fefefe;
+    /*text-align:center;*/
+    color:black;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 45%;
+}
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+</style>
+
 </head>
 <body>
     <%
@@ -27,7 +68,7 @@
 <div id="header">
   <h1><a href="events.jsp">EDSN Calendar - Events</a></h1>
 </div>
-<!--close-Header-part--> 
+<!--close-Header-part-->
 
 
 <!--top-Header-menu-->
@@ -71,7 +112,7 @@
     <li class="active"> <a href="GetEvents"><i class="icon icon-list-alt"></i> <span>Events</span></a> </li>
     <li> <a href="organize.jsp"><i class="icon icon-tags"></i> <span>Organize</span></a> </li>
     <li><a href="settings.jsp"><i class="icon icon-wrench"></i> <span>Settings</span></a></li>
-    <li><a href="users.jsp"><i class="icon icon-user"></i> <span>Users</span></a></li>
+    <li><a href="GetUsers"><i class="icon icon-user"></i> <span>Users</span></a></li>
     <li><a href="widgetcreator.jsp"><i class="icon icon-pencil"></i> <span>Widget Creator</span></a></li>
   </ul>
 </div>
@@ -119,7 +160,7 @@
           </div>
         </div>
         <div style="text-align: right;">
-            <a href="#" class="btn btn-success btn" onclick="publishSelected();">Publish selected</a> 
+            <a href="#" class="btn btn-success btn" onclick="publishSelected();">Publish selected</a>
             <a href="#" class="btn btn-danger btn" onclick="deleteSelected();">Delete selected</a>
         </div>
         <hr>
@@ -134,7 +175,7 @@
          <%}%>
        </select>
        <input type="hidden" id="critA" name="critA"value=""/>
-       
+
        <% ResultSet rs1 = (ResultSet)request.getAttribute("Ccriteria");%>
         <select id="category">
        <option value="">Category</option>
@@ -143,9 +184,9 @@
          <%}%>
        </select>
        <input type="hidden" id="critB" name="critB"value=""/>
-       <input type="submit" class="btn btn-info" value="Filter" onclick="fcriteria();" style="vertical-align: top;"> 
+       <input type="submit" class="btn btn-info" value="Filter" onclick="fcriteria();" style="vertical-align: top;">
         </form>
-    </div> 
+    </div>
     </div>
         <div id="allEvents" class="widget-box">
           <div class="widget-title"> <span class="icon"><i class="icon-th"></i></span>
@@ -181,22 +222,59 @@
                               <td> <center><%= resultSet.getString("location") %></center></td>
                               <td> <center><%= resultSet.getString("colorId") %></center></td>
                               <td> <center><%= resultSet.getString("isPublished") %></center></td>
+                              <td>
+                                 <button type="button" onclick="fopen(<%= resultSet.getString("id") %>)" id="myBtn"> Detail</button>
+                             </td>
                           </tr>
-                      <%}%>
+                     
               </tbody>
+               <%}%>
             </table>
           </div>
         </div>
       </div>
     </div>
   </div>
+
+
+  <div id="myModal" class="modal">
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">×</span>
+    <center><h2>Detailed Event View</h2></center>
+    <form name="dform" action="submitback" >
+                <table>
+                  <tr>
+                  <input type="hidden" id="anID" name="anID">
+                    <td class="align"><label>Start Date/Time:</label></td>
+                    <td><input type="date" class="form-control margins" id="startdate" name="startdate"></td>
+                    <td><input type="time" class="form-control margins" id="starttime" name="starttime"></td>
+                  </tr>
+                  <tr>
+                    <td class="align"><label>End Date/Time:</label></td>
+                    <td><input type="date" class="form-control margins" id="enddate" name="enddate"></td>
+                    <td><input type="time" class="form-control margins" id="endtime" name="endtime"></td>
+                  </tr>
+                </table>
+                  <input type="text" class="form-control margins" placeholder="Summary" name="summaryA"id="summaryA" maxlength="50" style="width:530px"><br>
+                  <textarea id="description" name="description"class="form-control margins" placeholder="Description (required - 100 character limit)" maxlength="100" style="width:530px"></textarea>
+                   <input type="text" class="form-control margins" id="location" name="location"placeholder="Location" maxlength="50" style="width:530px"><br>
+                  <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                  </div>
+              </form>
+  </div>
+</div>
+
+
+
 <!--End-breadcrumbs-->
 
 <!--Action boxes-->
 
 <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@PAGE CODE GOES HERE@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
 
-<!--End-Action boxes-->    
+<!--End-Action boxes-->
 
 
 <!--end-main-container-part-->
@@ -205,27 +283,27 @@
 
 <!--end-Footer-part-->
 
-<script src="js/excanvas.min.js"></script> 
-<script src="js/jquery.min.js"></script> 
-<script src="js/jquery.ui.custom.js"></script> 
-<script src="js/bootstrap.min.js"></script> 
-<script src="js/jquery.flot.min.js"></script> 
-<script src="js/jquery.flot.resize.min.js"></script> 
-<script src="js/jquery.peity.min.js"></script> 
-<script src="js/fullcalendar.min.js"></script> 
-<script src="js/matrix.js"></script> 
-<script src="js/matrix.dashboard.js"></script> 
-<script src="js/jquery.gritter.min.js"></script> 
-<script src="js/matrix.interface.js"></script> 
-<script src="js/matrix.chat.js"></script> 
-<script src="js/jquery.validate.js"></script> 
-<script src="js/matrix.form_validation.js"></script> 
-<script src="js/jquery.wizard.js"></script> 
-<script src="js/jquery.uniform.js"></script> 
-<script src="js/select2.min.js"></script> 
-<script src="js/matrix.popover.js"></script> 
-<script src="js/jquery.dataTables.min.js"></script> 
-<script src="js/matrix.tables.js"></script> 
+<script src="js/excanvas.min.js"></script>
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery.ui.custom.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.flot.min.js"></script>
+<script src="js/jquery.flot.resize.min.js"></script>
+<script src="js/jquery.peity.min.js"></script>
+<script src="js/fullcalendar.min.js"></script>
+<script src="js/matrix.js"></script>
+<script src="js/matrix.dashboard.js"></script>
+<script src="js/jquery.gritter.min.js"></script>
+<script src="js/matrix.interface.js"></script>
+<script src="js/matrix.chat.js"></script>
+<script src="js/jquery.validate.js"></script>
+<script src="js/matrix.form_validation.js"></script>
+<script src="js/jquery.wizard.js"></script>
+<script src="js/jquery.uniform.js"></script>
+<script src="js/select2.min.js"></script>
+<script src="js/matrix.popover.js"></script>
+<script src="js/jquery.dataTables.min.js"></script>
+<script src="js/matrix.tables.js"></script>
 <script src="js/edsn-cal-events.js"/></script>
 
 <script type="text/javascript">
@@ -236,32 +314,100 @@
 
       // if url is empty, skip the menu dividers and reset the menu selection to default
       if (newURL != "") {
-      
+
           // if url is "-", it is this page -- reset the menu:
           if (newURL == "-" ) {
-              resetMenu();            
-          } 
-          // else, send page to designated URL            
-          else {  
+              resetMenu();
+          }
+          // else, send page to designated URL
+          else {
             document.location.href = newURL;
           }
       }
   }
-  
+
   function fcriteria(){
-        
+
         var cr = document.getElementById("summary");
         var sv = cr.options[cr.selectedIndex].value;
         document.getElementById("critA").value=sv;
-        
+
         var cr = document.getElementById("category");
         var sv1 = cr.options[cr.selectedIndex].value;
         //alert(sv1);
         document.getElementById("critB").value=sv1;
         if(!(sv===sv1===""))
-            myform.submit(); 
-    }       
+            myform.submit();
+    }
 
+
+    function fopen(theid){
+          //var date = document.getElementById("dd").value 
+        document.getElementById("startdate").value = theid; 
+        //document.getElementById("starttime").value = thetime; 
+        if(window.XMLHttpRequest){
+                    xmlhttp = new XMLHttpRequest();
+                  }
+                else{
+                    xmlhttp = new ActiveXObject(Microsoft.XMLHTTP);}
+                 var url = "detailinfo?id=" + theid;
+                 xmlhttp.open("GET",url, true);
+                 xmlhttp.onreadystatechange = update;
+                 xmlhttp.send();   }
+       function update() {
+        if (xmlhttp.readyState == 4) {
+                if (xmlhttp.status == 200) {
+                    var rootNode=xmlhttp.responseXML.documentElement;
+                    //start date
+                    var startdateNode = rootNode.getElementsByTagName("startdate");
+                    var startdate = startdateNode[0].firstChild.nodeValue;
+                    document.getElementById("startdate").value=startdate;
+                    //start time
+                    var starttimeNode = rootNode.getElementsByTagName("starttime");
+                    var starttime = starttimeNode[0].firstChild.nodeValue;
+                    document.getElementById("starttime").value = starttime;
+                    //end date
+                    var enddateNode = rootNode.getElementsByTagName("enddate");
+                    var enddate = enddateNode[0].firstChild.nodeValue;
+                    document.getElementById("enddate").value=enddate;
+                    //end time
+                    var endtimeNode = rootNode.getElementsByTagName("endtime");
+                    var endtime = endtimeNode[0].firstChild.nodeValue;
+                    document.getElementById("endtime").value = endtime;
+                    //summary
+                    var summaryNode = rootNode.getElementsByTagName("summary");
+                    var summary = summaryNode[0].firstChild.nodeValue;
+                    //alert(summary);
+                    document.getElementById("summaryA").value = summary;
+                    //description
+                    var descriptionNode = rootNode.getElementsByTagName("description");
+                    var description = descriptionNode[0].firstChild.nodeValue;
+                    document.getElementById("description").value = description;
+                    //location
+                    var locationNode = rootNode.getElementsByTagName("location");
+                    var location = locationNode[0].firstChild.nodeValue;
+                    document.getElementById("location").value = location;
+                    //id
+                    var idNode = rootNode.getElementsByTagName("id");
+                    var id = idNode[0].firstChild.nodeValue;
+                    //alert(id);
+                    document.getElementById("anID").value = id;
+           var modal = document.getElementById('myModal');
+           var span = document.getElementsByClassName("close")[0];
+         modal.style.display = "block";
+         // When the user clicks on <span> (x), close the modal
+         span.onclick = function() {
+        modal.style.display = "none";
+        }
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+       }   
+  }  
+    }
+  }
 
 // resets the menu selection upon entry to this page:
 function resetMenu() {
@@ -270,4 +416,3 @@ function resetMenu() {
 </script>
 </body>
 </html>
-
