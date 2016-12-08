@@ -256,9 +256,9 @@
                     <td><input type="time" class="form-control margins" id="endtime" name="endtime"></td>
                   </tr>
                 </table>
-                  <input type="text" class="form-control margins" placeholder="Summary" name="summaryA"id="summaryA" maxlength="20" style="width:530px"><br>
+                  <input type="text" class="form-control margins" placeholder="Summary" name="summaryA"id="summaryA" maxlength="50" style="width:530px"><br>
                   <textarea id="description" name="description"class="form-control margins" placeholder="Description (required - 100 character limit)" maxlength="100" style="width:530px"></textarea>
-                   <input type="text" class="form-control margins" id="location" name="location"placeholder="Location" maxlength="20" style="width:530px"><br>
+                   <input type="text" class="form-control margins" id="location" name="location"placeholder="Location" maxlength="50" style="width:530px"><br>
                   <div class="modal-footer">
                     <button type="submit" class="btn btn-primary btn-block">Submit</button>
                   </div>
