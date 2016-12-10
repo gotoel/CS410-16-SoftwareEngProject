@@ -45,6 +45,13 @@ and open the template in the editor.
                 <input type="text" class="form-control margins" name="city" maxlength="20" placeholder="City (required)">
                 <input type="text" class="form-control margins" name="state" maxlength="2" placeholder="State (required)">
                 <input type="text" class="form-control margins" name="zip" maxlength="5" placeholder="Zip Code (required)">
+                <label>Select category:</label>
+                <select name="categories">
+                    <option value="Education">Education</option>
+                    <option value="Music">Music</option>
+                    <option value="Religion">Religion</option>
+                    <option value="Sport">Sport</option>
+                </select>
                 <table>
                   <tr>
                     <td class="align"><label>Start Date/Time:</label></td>

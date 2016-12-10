@@ -52,10 +52,13 @@ public class EventSubmit extends HttpServlet {
             String city = request.getParameter("city");
             String state = request.getParameter("state");
             String zipCode = request.getParameter("zip");
+            String category = request.getParameter("categories");
+            String subName = request.getParameter("fullName");
+            String subEmail = request.getParameter("email");
             String location = address + ", " + city + " " + state + ", " + zipCode;
             Class.forName(Settings.dbDriver);
             con = DriverManager.getConnection(Settings.dbURL,Settings.dbUsername,Settings.dbPass);
-            ps = con.prepareStatement("insert into events (ID,start_date,start_time,end_date,end_time,summary,description,location,colorId,ispublished) values (null,?,?,?,?,?,?,?,'idk',0)");
+            ps = con.prepareStatement("insert into events (ID,start_date,start_time,end_date,end_time,summary,description,location,colorId,ispublished,Category,subName,subEmail) values (null,?,?,?,?,?,?,?,'idk',0,?,?,?)");
             ps.setString(1, strDate);
             ps.setString(2, strTime);
             ps.setString(3, endDate);
@@ -63,6 +66,9 @@ public class EventSubmit extends HttpServlet {
             ps.setString(5, summary);
             ps.setString(6, descrpt);
             ps.setString(7, location);
+            ps.setString(8, category);
+            ps.setString(9, subName);
+            ps.setString(10, subEmail);
             ps.executeUpdate();
             ps.close();
             con.close();

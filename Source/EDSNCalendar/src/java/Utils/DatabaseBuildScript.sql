@@ -37,7 +37,9 @@ CREATE TABLE IF NOT EXISTS `events` (
   `location` varchar(50) COLLATE latin1_general_ci NOT NULL,
   `colorId` varchar(50) COLLATE latin1_general_ci NOT NULL,
   `isPublished` tinyint(1) NOT NULL,
-  `Category` varchar(100) COLLATE latin1_general_ci DEFAULT NULL
+  `Category` varchar(100) COLLATE latin1_general_ci DEFAULT NULL,
+  `subName` varchar(50) COLLATE latin1_general_ci NOT NULL,
+  `subEmail` varchar(50) COLLATE latin1_general_ci NOT NULL
 ) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
 --
@@ -45,17 +47,17 @@ CREATE TABLE IF NOT EXISTS `events` (
 --
 
 INSERT INTO `events` (`id`, `start_date`, `start_time`, `end_date`, `end_time`, `summary`, `description`, `location`, `colorId`, `isPublished`, `Category`) VALUES
-(1, '2016-11-10', '10:00:00', '2016-11-10', '12:00:00', 'Pool Party', 'It''s a Pool Party', '999 Swimming Ave, Farmington CT 02352', 'Blue?', 0, 'party'),
-(2, '2016-11-02', '07:00:00', '2016-11-02', '11:00:00', 'A Published Event', 'Good Enough to be published', '3 Publication St, New Britain Ct, 06053', 'Still No Idea', 1, 'ahh'),
-(3, '2016-11-02', '07:00:00', '2016-11-02', '11:00:00', 'A Published Event', 'DGASDGASDG', '3 Publication St, New Britain Ct, 06053', 'Still No Idea', 1, NULL),
-(4, '2016-11-02', '07:00:00', '2016-11-02', '11:00:00', 'A Published Event', 'sdgsagds', '3 Publication St, New Britain Ct, 06053', 'Still No Idea', 1, NULL),
-(5, '2016-11-02', '07:00:00', '2016-11-02', '11:00:00', 'A Published Event', 'agasgd', '3 Publication St, New Britain Ct, 06053', 'Still No Idea', 0, NULL),
-(6, '2016-11-02', '07:00:00', '2016-11-02', '11:00:00', 'A Published Event', 'Ggdag', '3 Publication St, New Britain Ct, 06053', 'Still No Idea', 0, NULL),
-(7, '2016-11-02', '07:00:00', '2016-11-02', '11:00:00', 'A Published Event', 'Goodasdgasdghed', '3 Publication St, New Britain Ct, 06053', 'Still No Idea', 0, NULL),
-(8, '2016-11-02', '07:00:00', '2016-11-02', '11:00:00', 'A Published Event', 'Good Enoasdgpublished', '3 Publication St, New Britain Ct, 06053', 'Still No Idea', 0, NULL),
-(9, '2016-11-02', '07:00:00', '2016-11-02', '11:00:00', 'A Published Event', 'Good Enouasdgasdgasdpublished', '3 Publication St, New Britain Ct, 06053', 'Still No Idea', 1, NULL),
-(10, '2016-11-02', '07:00:00', '2016-11-02', '11:00:00', 'A Published Event', 'Good Enough to be published', '3 Publication St, New Britain Ct, 06053', 'Still No Idea', 0, NULL),
-(11, '2016-11-02', '07:00:00', '2016-11-02', '11:00:00', 'A Published Event', 'Gooasdgasdgablished', '3 Publication St, New Britain Ct, 06053', 'Still No Idea', 1, NULL);
+(1, '2016-11-10', '10:00:00', '2016-11-10', '12:00:00', 'Pool Party', 'It''s a Pool Party', '999 Swimming Ave, Farmington CT 02352', 'Blue?', 0, 'party','Admin','admin@admin.com'),
+(2, '2016-11-02', '07:00:00', '2016-11-02', '11:00:00', 'A Published Event', 'Good Enough to be published', '3 Publication St, New Britain Ct, 06053', 'Still No Idea', 1, 'ahh','Admin','admin@admin.com'),
+(3, '2016-11-02', '07:00:00', '2016-11-02', '11:00:00', 'A Published Event', 'DGASDGASDG', '3 Publication St, New Britain Ct, 06053', 'Still No Idea', 1, NULL,'Admin','admin@admin.com'),
+(4, '2016-11-02', '07:00:00', '2016-11-02', '11:00:00', 'A Published Event', 'sdgsagds', '3 Publication St, New Britain Ct, 06053', 'Still No Idea', 1, NULL,'Admin','admin@admin.com'),
+(5, '2016-11-02', '07:00:00', '2016-11-02', '11:00:00', 'A Published Event', 'agasgd', '3 Publication St, New Britain Ct, 06053', 'Still No Idea', 0, NULL,'Admin','admin@admin.com'),
+(6, '2016-11-02', '07:00:00', '2016-11-02', '11:00:00', 'A Published Event', 'Ggdag', '3 Publication St, New Britain Ct, 06053', 'Still No Idea', 0, NULL,'Admin','admin@admin.com'),
+(7, '2016-11-02', '07:00:00', '2016-11-02', '11:00:00', 'A Published Event', 'Goodasdgasdghed', '3 Publication St, New Britain Ct, 06053', 'Still No Idea', 0, NULL,'Admin','admin@admin.com'),
+(8, '2016-11-02', '07:00:00', '2016-11-02', '11:00:00', 'A Published Event', 'Good Enoasdgpublished', '3 Publication St, New Britain Ct, 06053', 'Still No Idea', 0, NULL,'Admin','admin@admin.com'),
+(9, '2016-11-02', '07:00:00', '2016-11-02', '11:00:00', 'A Published Event', 'Good Enouasdgasdgasdpublished', '3 Publication St, New Britain Ct, 06053', 'Still No Idea', 1, NULL,'Admin','admin@admin.com'),
+(10, '2016-11-02', '07:00:00', '2016-11-02', '11:00:00', 'A Published Event', 'Good Enough to be published', '3 Publication St, New Britain Ct, 06053', 'Still No Idea', 0, NULL,'Admin','admin@admin.com'),
+(11, '2016-11-02', '07:00:00', '2016-11-02', '11:00:00', 'A Published Event', 'Gooasdgasdgablished', '3 Publication St, New Britain Ct, 06053', 'Still No Idea', 1, NULL,'Admin','admin@admin.com');
 
 -- --------------------------------------------------------
 
