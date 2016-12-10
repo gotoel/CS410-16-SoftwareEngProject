@@ -1,9 +1,12 @@
+package Settings;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 
+import Settings.Settings;
 import java.io.IOException;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -39,8 +42,8 @@ public class GetUsers extends HttpServlet {
         PreparedStatement ps;
         ResultSet rs;
         try {
-            Class.forName(DBInfo.dbDriver);
-            con = DriverManager.getConnection(DBInfo.dbURL, DBInfo.dbUsername, DBInfo.dbPass);
+            Class.forName(Settings.dbDriver);
+            con = DriverManager.getConnection(Settings.dbURL, Settings.dbUsername, Settings.dbPass);
             ps = con.prepareStatement("select * from users");
             rs = ps.executeQuery();
             request.setAttribute("users", rs);

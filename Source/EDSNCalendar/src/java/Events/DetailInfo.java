@@ -1,27 +1,30 @@
+package Events;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 
+import Settings.Settings;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import java.sql.Connection;
+import java.sql.SQLException;
 /**
  *
- * @author TOMEK
+ * @author pc
  */
-
-@WebServlet(urlPatterns = {"/submitback"})
-public class submitback extends HttpServlet {
+@WebServlet(urlPatterns = {"/detailinfo"})
+public class DetailInfo extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,39 +37,45 @@ public class submitback extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        Connection con;
+       response.setContentType("text/xml;charset=UTF-8");
+       PrintWriter out = response.getWriter();
+       Connection con;
         PreparedStatement ps;
-        PrintWriter out = response.getWriter();
-        try  {
-            String strDate = request.getParameter("startdate");
-            String strTime = request.getParameter("starttime");
-            String endDate = request.getParameter("enddate");
-            String endTime = request.getParameter("endtime");
-            String descrpt = request.getParameter("description");
-            String location = request.getParameter("location");
-            Integer id = Integer.parseInt(request.getParameter("anID"));
-            Class.forName(DBInfo.dbDriver);
-            con = DriverManager.getConnection(DBInfo.dbURL,DBInfo.dbUsername,DBInfo.dbPass);
-            //ps = con.prepareStatement("insert into events (ID,start_date,start_time,end_date,end_time,summary,description,location,colorId,ispublished) values (null,?,?,?,?,?,?,?,'idk',0)");
-            ps = con.prepareStatement("update events set start_date =?, start_time=?, end_date=?, end_time=?,description=?,location=? WHERE id=?");
-            ps.setString(1, strDate);
-            ps.setString(2, strTime);
-            ps.setString(3, endDate);
-            ps.setString(4, endTime);
-            ps.setString(5, descrpt);
-            ps.setString(6, location);
-            ps.setInt(7, id);
-            ps.executeUpdate();
-            ps.close();
-            con.close();
-            response.sendRedirect("GetEvents");
-        } catch (Exception e) {
-            out.println("Exception occured " + e.getMessage());
-            e.printStackTrace();
-        } finally{
-            out.close();
-        }
+        ResultSet rs;      
+        try 
+            {
+                Class.forName(Settings.dbDriver);
+                con= DriverManager.getConnection(Settings.dbURL,Settings.dbUsername,Settings.dbPass);
+                ps=con.prepareStatement("select * from events where id=?");
+                int id = Integer.parseInt(request.getParameter("id"));
+                ps.setInt(1, id);
+                rs=ps.executeQuery();
+                rs.next();
+                String str = "";
+                str += "<data>\n";
+                str+="<id>" + rs.getInt("id") + "</id>";
+                str += "<startdate>" + rs.getString("start_date") + "</startdate>\n";
+                str += "<starttime>" + rs.getString("start_time") + "</starttime>\n";
+                str += "<enddate>" + rs.getString("end_date") + "</enddate>\n";
+                str += "<endtime>" + rs.getString("end_time") + "</endtime>\n";
+                str += "<summary>" + rs.getString("summary") + "</summary>\n";
+                str += "<description>" + rs.getString("description") + "</description>\n";
+                str+= "<location>" + rs.getString("location") + "</location>";
+                str+= "</data>\n";
+                
+                out.println(str);
+                
+                 out.close();
+                 //rs.close(); 
+                 //ps.close();
+                 //con.close();
+
+            }
+            catch (SQLException | ClassNotFoundException ex) 
+            {
+                System.out.println("Failure");
+            }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

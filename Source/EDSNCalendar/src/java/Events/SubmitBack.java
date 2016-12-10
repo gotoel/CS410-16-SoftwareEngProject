@@ -1,28 +1,30 @@
+package Events;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 
+import Settings.Settings;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.sql.Connection;
-import java.sql.SQLException;
 
 /**
  *
- * @author pc
+ * @author TOMEK
  */
-@WebServlet(urlPatterns = {"/Filter"})
-public class Filter extends HttpServlet {
+
+@WebServlet(urlPatterns = {"/submitback"})
+public class SubmitBack extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,52 +38,38 @@ public class Filter extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-         Connection conn;
-         ResultSet rs,rsS,rsC;
-         PreparedStatement ps;
-        try (PrintWriter out = response.getWriter()) {
-            Class.forName(DBInfo.dbDriver);
-            conn= DriverManager.getConnection(DBInfo.dbURL,DBInfo.dbUsername,DBInfo.dbPass);
-            String critA = request.getParameter("critA");
-            String critB = request.getParameter("critB");
-            //crit = "pool";
-            if(!(critA.isEmpty()) || !(critB.isEmpty())){
-             if (critA.isEmpty() && !(critB.isEmpty())){
-                ps = conn.prepareStatement("Select * from events where Category=?");
-                ps.setString(1,critB);
-                rs = ps.executeQuery();
-                request.setAttribute("events", rs);
-            }
-            else if(!(critA.isEmpty())&& critB.isEmpty()){
-                ps = conn.prepareStatement("Select * from events where summary like?");
-                ps.setString(1,critA + "%");
-                rs = ps.executeQuery();
-                request.setAttribute("events", rs);
-            }
-            else if(!(critA).isEmpty() && !(critB.isEmpty())){
-                ps = conn.prepareStatement("Select * from events where summary like ? and Category = ?");
-                ps.setString(1,critA + "%");
-                ps.setString(2,critB);
-                rs = ps.executeQuery();
-                request.setAttribute("events", rs);
-            }
-            
-            //rs = ps.executeQuery();
-            
-            ps = conn.prepareStatement("select * from events");
-            rsS = ps.executeQuery(); //summary
-            request.setAttribute("Scriteria", rsS);
-            ps = conn.prepareStatement("select * from events");
-            rsC = ps.executeQuery(); //category
-            request.setAttribute("Ccriteria", rsC);
-            request.getRequestDispatcher("Tables.jsp").forward(request,response);
-          }
+        Connection con;
+        PreparedStatement ps;
+        PrintWriter out = response.getWriter();
+        try  {
+            String strDate = request.getParameter("startdate");
+            String strTime = request.getParameter("starttime");
+            String endDate = request.getParameter("enddate");
+            String endTime = request.getParameter("endtime");
+            String descrpt = request.getParameter("description");
+            String location = request.getParameter("location");
+            Integer id = Integer.parseInt(request.getParameter("anID"));
+            Class.forName(Settings.dbDriver);
+            con = DriverManager.getConnection(Settings.dbURL,Settings.dbUsername,Settings.dbPass);
+            //ps = con.prepareStatement("insert into events (ID,start_date,start_time,end_date,end_time,summary,description,location,colorId,ispublished) values (null,?,?,?,?,?,?,?,'idk',0)");
+            ps = con.prepareStatement("update events set start_date =?, start_time=?, end_date=?, end_time=?,description=?,location=? WHERE id=?");
+            ps.setString(1, strDate);
+            ps.setString(2, strTime);
+            ps.setString(3, endDate);
+            ps.setString(4, endTime);
+            ps.setString(5, descrpt);
+            ps.setString(6, location);
+            ps.setInt(7, id);
+            ps.executeUpdate();
+            ps.close();
+            con.close();
+            response.sendRedirect("GetEvents");
+        } catch (Exception e) {
+            out.println("Exception occured " + e.getMessage());
+            e.printStackTrace();
+        } finally{
+            out.close();
         }
-        
-          catch (SQLException | ClassNotFoundException ex) 
-            {
-                System.out.println("Failure");
-            }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

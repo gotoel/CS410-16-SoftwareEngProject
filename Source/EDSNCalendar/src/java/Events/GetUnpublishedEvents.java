@@ -1,4 +1,7 @@
+package Events;
 
+
+import Settings.Settings;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.DriverManager;
@@ -40,8 +43,8 @@ public class GetUnpublishedEvents extends HttpServlet {
         ResultSet rs;      
         try 
         {
-            Class.forName(DBInfo.dbDriver);
-            con= DriverManager.getConnection(DBInfo.dbURL,DBInfo.dbUsername,DBInfo.dbPass);
+            Class.forName(Settings.dbDriver);
+            con= DriverManager.getConnection(Settings.dbURL,Settings.dbUsername,Settings.dbPass);
             // Get a result set of all unpublished events, so where isPublished is set to 0.
             ps=con.prepareStatement("select * from events where isPublished=0", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             rs=ps.executeQuery();

@@ -4,61 +4,29 @@
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
     <servlet>
-        <display-name>GetEvents</display-name>
-        <servlet-name>GetEvents</servlet-name>
-    </servlet>
-    <servlet>
         <servlet-name>GetUnpublishedEvents</servlet-name>
-        <servlet-class>GetUnpublishedEvents</servlet-class>
+        <servlet-class>Events.GetUnpublishedEvents</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>RejectionSender</servlet-name>
-        <servlet-class>RejectionSender</servlet-class>
+        <servlet-class>Events.RejectionSender</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>EventSubmit</servlet-name>
-        <servlet-class>EventSubmit</servlet-class>
+        <servlet-class>Events.EventSubmit</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>CalendarInsert</servlet-name>
-        <servlet-class>CalendarInsert</servlet-class>
+        <servlet-class>Events.CalendarInsert</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>GetUsers</servlet-name>
-        <servlet-class>GetUsers</servlet-class>
+        <servlet-class>Settings.GetUsers</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>UserInsert</servlet-name>
-        <servlet-class>UserInsert</servlet-class>
+        <servlet-class>Users.UserInsert</servlet-class>
     </servlet>
-    <servlet-mapping>
-        <servlet-name>GetEvents</servlet-name>
-        <url-pattern>/GetEvents</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>GetUnpublishedEvents</servlet-name>
-        <url-pattern>/GetUnpublishedEvents</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>RejectionSender</servlet-name>
-        <url-pattern>/RejectionSender</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>EventSubmit</servlet-name>
-        <url-pattern>/EventSubmit</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>CalendarInsert</servlet-name>
-        <url-pattern>/CalendarInsert</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>GetUsers</servlet-name>
-        <url-pattern>/GetUsers</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>UserInsert</servlet-name>
-        <url-pattern>/UserInsert</url-pattern>
-    </servlet-mapping>
     <session-config>
         <session-timeout>
             30

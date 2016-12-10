@@ -1,9 +1,12 @@
+package Events;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 //
+import Settings.Settings;
 import com.google.api.client.auth.oauth2.Credential;
 import com.google.api.client.extensions.java6.auth.oauth2.AuthorizationCodeInstalledApp;
 import com.google.api.client.extensions.jetty.auth.oauth2.LocalServerReceiver;
@@ -43,11 +46,11 @@ public class EventPublisher extends HttpServlet {
 
     //<--------------Google Calendar instance variables and methods begin here----------------->
     private static final String APPLICATION_NAME
-            = "258158693641-vjfjotncl9l4spi4j3h380je3kp31hvo.apps.googleusercontent.com";
+            = Settings.applicationName;
     
     //Directory to store user credentials for this application.
     private static final java.io.File DATA_STORE_DIR = new java.io.File(
-            System.getProperty("user.home"), ".credentials/calendar-java-quickstart");
+            System.getProperty("user.home"), Settings.dataStoreFile);
 
     //Global instance of the {@link FileDataStoreFactory}.
     private static FileDataStoreFactory DATA_STORE_FACTORY;
@@ -77,7 +80,7 @@ public class EventPublisher extends HttpServlet {
     public static Credential authorize() throws IOException {
         // Load client secrets.
         InputStream in
-                = CalendarInsert.class.getResourceAsStream("/client_secret.json");
+                = CalendarInsert.class.getResourceAsStream(Settings.credentialsFile);
         GoogleClientSecrets clientSecrets
                 = GoogleClientSecrets.load(JSON_FACTORY, new InputStreamReader(in));
 
@@ -119,8 +122,8 @@ public class EventPublisher extends HttpServlet {
             String action = request.getParameter("action");
 
             if (eventID != null) {
-                Class.forName(DBInfo.dbDriver);
-                con = DriverManager.getConnection(DBInfo.dbURL, DBInfo.dbUsername, DBInfo.dbPass);
+                Class.forName(Settings.dbDriver);
+                con = DriverManager.getConnection(Settings.dbURL, Settings.dbUsername, Settings.dbPass);
 
                 // Create a statement that will update the isPublished status of the specified event.
                 ps = con.prepareStatement("UPDATE events SET isPublished=? where id=?");

@@ -1,9 +1,12 @@
+package Events;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 
+import Settings.Settings;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -50,13 +53,13 @@ public class CalendarInsert extends HttpServlet {
      * Application name.
      */
     private static final String APPLICATION_NAME
-            = "258158693641-vjfjotncl9l4spi4j3h380je3kp31hvo.apps.googleusercontent.com";
+            = Settings.applicationName;
 
     /**
      * Directory to store user credentials for this application.
      */
     private static final java.io.File DATA_STORE_DIR = new java.io.File(
-            System.getProperty("user.home"), ".credentials/calendar-java-quickstart");
+            System.getProperty("user.home"), Settings.dataStoreFile);
 
     /**
      * Global instance of the {@link FileDataStoreFactory}.
@@ -102,7 +105,7 @@ public class CalendarInsert extends HttpServlet {
     public static Credential authorize() throws IOException {
         // Load client secrets.
         InputStream in
-                = CalendarInsert.class.getResourceAsStream("/client_secret.json");
+                = CalendarInsert.class.getResourceAsStream(Settings.credentialsFile);
         GoogleClientSecrets clientSecrets
                 = GoogleClientSecrets.load(JSON_FACTORY, new InputStreamReader(in));
 
@@ -176,7 +179,7 @@ public class CalendarInsert extends HttpServlet {
 
         //event.setReminders(reminders);
 
-        String calendarId = "l0u6k0e8s4i26sgpoh68g9e2io@group.calendar.google.com";
+        String calendarId = Settings.calendarID;
         event = service.events().insert(calendarId, event).execute();
 
     }

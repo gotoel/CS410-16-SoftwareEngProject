@@ -1,9 +1,12 @@
+package Users;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 
+import Settings.Settings;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.security.MessageDigest;
@@ -49,8 +52,8 @@ public class LoginServlet extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             try {
             // Initialize DB stuff
-            Class.forName(DBInfo.dbDriver);
-            con = DriverManager.getConnection(DBInfo.dbURL,DBInfo.dbUsername,DBInfo.dbPass);
+            Class.forName(Settings.dbDriver);
+            con = DriverManager.getConnection(Settings.dbURL,Settings.dbUsername,Settings.dbPass);
             String username = request.getParameter("username");
             String plaintextPassword = request.getParameter("password");
             MessageDigest md = MessageDigest.getInstance("MD5");

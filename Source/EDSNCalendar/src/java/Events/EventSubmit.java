@@ -1,12 +1,15 @@
+package Events;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 
+import Settings.Settings;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.security.MessageDigest;
+import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import javax.servlet.ServletException;
@@ -14,14 +17,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.sql.Connection;
 
 /**
  *
  * @author TOMEK
  */
-@WebServlet(urlPatterns = {"/UserInsert"})
-public class UserInsert extends HttpServlet {
+
+@WebServlet(urlPatterns = {"/EventSubmit"})
+public class EventSubmit extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,36 +41,38 @@ public class UserInsert extends HttpServlet {
         Connection con;
         PreparedStatement ps;
         PrintWriter out = response.getWriter();
-        try {
-            Class.forName(DBInfo.dbDriver);
-            con = DriverManager.getConnection(DBInfo.dbURL, DBInfo.dbUsername, DBInfo.dbPass);
-            String userName = request.getParameter("username");
-            String plainPwd = request.getParameter("password");
-            int accessLvl = Integer.parseInt(request.getParameter("accessLvl"));
-            MessageDigest md = MessageDigest.getInstance("MD5");
-
-            md.update(plainPwd.getBytes());
-            byte[] bytes = md.digest();
-            StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < bytes.length; i++) {
-                sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
-            }
-            String hashPwd = sb.toString();
-            
-            ps = con.prepareStatement("insert into users (id,username,password,access_level) values (null,?,?,?)");
-            ps.setString(1, userName);
-            ps.setString(2, hashPwd);
-            ps.setInt(3, accessLvl);
+        try  {
+            String strDate = request.getParameter("strdate");
+            String strTime = request.getParameter("strtime");
+            String endDate = request.getParameter("enddate");
+            String endTime = request.getParameter("endtime");
+            String summary = request.getParameter("title");
+            String descrpt = request.getParameter("description");
+            String address = request.getParameter("address");
+            String city = request.getParameter("city");
+            String state = request.getParameter("state");
+            String zipCode = request.getParameter("zip");
+            String location = address + ", " + city + " " + state + ", " + zipCode;
+            Class.forName(Settings.dbDriver);
+            con = DriverManager.getConnection(Settings.dbURL,Settings.dbUsername,Settings.dbPass);
+            ps = con.prepareStatement("insert into events (ID,start_date,start_time,end_date,end_time,summary,description,location,colorId,ispublished) values (null,?,?,?,?,?,?,?,'idk',0)");
+            ps.setString(1, strDate);
+            ps.setString(2, strTime);
+            ps.setString(3, endDate);
+            ps.setString(4, endTime);
+            ps.setString(5, summary);
+            ps.setString(6, descrpt);
+            ps.setString(7, location);
             ps.executeUpdate();
             ps.close();
             con.close();
-            response.sendRedirect("GetUsers");
-        } catch(Exception ex){
-                out.write(ex.toString());
-          } finally{
+            response.sendRedirect("frontpage.jsp");
+        } catch (Exception e) {
+            out.println("Exception occured " + e.getMessage());
+            e.printStackTrace();
+        } finally{
             out.close();
         }
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

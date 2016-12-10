@@ -24,7 +24,7 @@
     %>
 <!--Header-part-->
 <div id="header">
-  <h1><a href="dashboard.jsp">Matrix Admin</a></h1>
+  <h1><a href="dashboard.jsp">EDSN Calendar - Settings</a></h1>
 </div>
 <!--close-Header-part--> 
 
@@ -36,20 +36,7 @@
       <ul class="dropdown-menu">
         <li><a href="#"><i class="icon-user"></i> My Profile</a></li>
         <li class="divider"></li>
-        <li><a href="#"><i class="icon-check"></i> My Tasks</a></li>
-        <li class="divider"></li>
         <li><a href="login.jsp"><i class="icon-key"></i> Log Out</a></li>
-      </ul>
-    </li>
-    <li class="dropdown" id="menu-messages"><a href="#" data-toggle="dropdown" data-target="#menu-messages" class="dropdown-toggle"><i class="icon icon-envelope"></i> <span class="text">Messages</span> <span class="label label-important">5</span> <b class="caret"></b></a>
-      <ul class="dropdown-menu">
-        <li><a class="sAdd" title="" href="#"><i class="icon-plus"></i> new message</a></li>
-        <li class="divider"></li>
-        <li><a class="sInbox" title="" href="#"><i class="icon-envelope"></i> inbox</a></li>
-        <li class="divider"></li>
-        <li><a class="sOutbox" title="" href="#"><i class="icon-arrow-up"></i> outbox</a></li>
-        <li class="divider"></li>
-        <li><a class="sTrash" title="" href="#"><i class="icon-trash"></i> trash</a></li>
       </ul>
     </li>
     <li class=""><a title="" href="#"><i class="icon icon-cog"></i> <span class="text">Settings</span></a></li>
@@ -58,10 +45,6 @@
 </div>
 <!--close-top-Header-menu-->
 <!--start-top-serch-->
-<div id="search">
-  <input type="text" placeholder="Search here..."/>
-  <button type="submit" class="tip-bottom" title="Search"><i class="icon-search icon-white"></i></button>
-</div>
 <!--close-top-serch-->
 <!--sidebar-menu-->
 <div id="sidebar"><a href="#" class="visible-phone"><i class="icon icon-home"></i> Dashboard</a>
@@ -69,19 +52,100 @@
     <li><a href="index.jsp"><i class="icon icon-home"></i> <span>Dashboard</span></a> </li>
     <li> <a href="GetEvents"><i class="icon icon-list-alt"></i> <span>Events</span></a> </li>
     <li> <a href="organize.jsp"><i class="icon icon-tags"></i> <span>Organize</span></a> </li>
-    <li class="active"><a href="settings.jsp"><i class="icon icon-wrench"></i> <span>Settings</span></a></li>
+    <li class="active"><a href="Settings"><i class="icon icon-wrench"></i> <span>Settings</span></a></li>
     <li><a href="GetUsers"><i class="icon icon-user"></i> <span>Users</span></a></li>
     <li><a href="widgetcreator.jsp"><i class="icon icon-pencil"></i> <span>Widget Creator</span></a></li>
   </ul>
 </div>
 <!--sidebar-menu-->
-
 <!--main-container-part-->
 <div id="content">
 <!--breadcrumbs-->
   <div id="content-header">
         <div id="breadcrumb"> <a href="index.jsp" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#">Settings</a> </div>
     <h1>Settings</h1>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span6">
+              <div class="alert alert-info">
+              Settings are saved to: <%=System.getProperty("user.dir")%>\config.properties </div>
+              <div><%=(request.getAttribute("result") == null ? "" : request.getAttribute("result"))%></div>
+              <div class="widget-box">
+                <div class="widget-title"> <span class="icon"> <i class="icon-align-justify"></i> </span>
+                  <h5>Database settings</h5>
+                </div>
+                <div class="widget-content nopadding">
+                  <form action="Settings?requestAction=setDatabaseSettings" method="post" class="form-horizontal">
+                    <div class="control-group">
+                      <label class="control-label">Database URL :</label>
+                      <div class="controls">
+                        <input name="databaseURL" type="text" class="span11" placeholder="Database URL" value=<%=request.getAttribute("dbURL")%>>
+                      </div>
+                    </div>
+                    <div class="control-group">
+                      <label class="control-label">Database driver :</label>
+                      <div class="controls">
+                        <input name="databaseDriver" type="text" class="span11" placeholder="Databse driver" value=<%=request.getAttribute("dbDriver")%>>
+                      </div>
+                    </div>
+                    <div class="control-group">
+                      <label class="control-label">Database username :</label>
+                      <div class="controls">
+                        <input name="databaseUsername" type="text" class="span11" placeholder="Database username" value=<%=request.getAttribute("dbUsername")%>>
+                      </div>
+                    </div>
+                    <div class="control-group">
+                      <label class="control-label">Database password :</label>
+                      <div class="controls">
+                        <input name="databasePassword" type="password" class="span11" placeholder="Database password" value=<%=request.getAttribute("dbPass")%>>
+                      </div>
+                    </div>
+                    <div class="form-actions">
+                      <button type="submit" class="btn btn-success">Save</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+                <div class="widget-box">
+                <div class="widget-title"> <span class="icon"> <i class="icon-align-justify"></i> </span>
+                  <h5>Google calendar settings</h5>
+                </div>
+                <div class="widget-content nopadding">
+                  <form action="Settings?requestAction=setGoogleCalendarSettings" method="post" class="form-horizontal">
+                    <div class="control-group">
+                      <label class="control-label">Application name :</label>
+                      <div class="controls">
+                          <input name="applicationName" type="text" class="span11" placeholder="Application name" value=<%=request.getAttribute("applicationName")%>>
+                      </div>
+                    </div>
+                    <div class="control-group">
+                      <label class="control-label">Calendar ID :</label>
+                      <div class="controls">
+                        <input name="calendarID" type="text" class="span11" placeholder="Calendar ID" value=<%=request.getAttribute("calendarID")%>>
+                      </div>
+                    </div>
+                    <div class="control-group">
+                      <label class="control-label">Data store file :</label>
+                      <div class="controls">
+                        <input name="dataStoreFile" type="text" class="span11" placeholder="Data store file" value=<%=request.getAttribute("dataStoreFile")%>>
+                      </div>
+                    </div>
+                    <div class="control-group">
+                      <label class="control-label">Credentials file :</label>
+                      <div class="controls">
+                        <input name="credentialsFile" type="text" class="span11" placeholder="Credentials file" value=<%=request.getAttribute("credentialsFile")%>>
+                      </div>
+                    </div>
+                    <div class="form-actions">
+                      <button type="submit" class="btn btn-success">Save</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
   </div>
 <!--End-breadcrumbs-->
 

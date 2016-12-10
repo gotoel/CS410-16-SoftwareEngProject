@@ -1,9 +1,12 @@
+package Events;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 
+import Settings.Settings;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -48,8 +51,8 @@ public class RejectionSender extends HttpServlet {
             if(eventID != null)
             {
                 
-                Class.forName(DBInfo.dbDriver);
-                con= DriverManager.getConnection(DBInfo.dbURL,DBInfo.dbUsername,DBInfo.dbPass);
+                Class.forName(Settings.dbDriver);
+                con= DriverManager.getConnection(Settings.dbURL,Settings.dbUsername,Settings.dbPass);
                 //In the future this select query will bring the resultset with the offender's email for use in writing the rejection
                 //For now, I'm hardcoding my own email for debug purposes
                 

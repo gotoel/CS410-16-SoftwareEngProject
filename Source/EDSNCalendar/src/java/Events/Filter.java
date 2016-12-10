@@ -1,13 +1,14 @@
+package Events;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 
+import Settings.Settings;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.security.MessageDigest;
-import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,13 +17,15 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.sql.Connection;
+import java.sql.SQLException;
 
 /**
  *
- * @author gotoel
+ * @author pc
  */
-@WebServlet(urlPatterns = {"/UserManager"})
-public class UserManager extends HttpServlet {
+@WebServlet(urlPatterns = {"/Filter"})
+public class Filter extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,33 +39,52 @@ public class UserManager extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        Connection con;
-        PreparedStatement ps;
-        ResultSet rs; 
-        try (PrintWriter out = response.getWriter()) { 
-            // Get management action
-            String action = request.getParameter("action");
+         Connection conn;
+         ResultSet rs,rsS,rsC;
+         PreparedStatement ps;
+        try (PrintWriter out = response.getWriter()) {
+            Class.forName(Settings.dbDriver);
+            conn= DriverManager.getConnection(Settings.dbURL,Settings.dbUsername,Settings.dbPass);
+            String critA = request.getParameter("critA");
+            String critB = request.getParameter("critB");
+            //crit = "pool";
+            if(!(critA.isEmpty()) || !(critB.isEmpty())){
+             if (critA.isEmpty() && !(critB.isEmpty())){
+                ps = conn.prepareStatement("Select * from events where Category=?");
+                ps.setString(1,critB);
+                rs = ps.executeQuery();
+                request.setAttribute("events", rs);
+            }
+            else if(!(critA.isEmpty())&& critB.isEmpty()){
+                ps = conn.prepareStatement("Select * from events where summary like?");
+                ps.setString(1,critA + "%");
+                rs = ps.executeQuery();
+                request.setAttribute("events", rs);
+            }
+            else if(!(critA).isEmpty() && !(critB.isEmpty())){
+                ps = conn.prepareStatement("Select * from events where summary like ? and Category = ?");
+                ps.setString(1,critA + "%");
+                ps.setString(2,critB);
+                rs = ps.executeQuery();
+                request.setAttribute("events", rs);
+            }
             
-            // Initialize DB stuff
-            Class.forName(DBInfo.dbDriver);
-            con = DriverManager.getConnection(DBInfo.dbURL,DBInfo.dbUsername,DBInfo.dbPass);
+            //rs = ps.executeQuery();
             
-            if(action.equals("addUser"))
-            {
-
-            }
-            else if(action.equals("deleteUser"))
-            {
-
-            }
-            else if(action.equals("editUser"))
-            {
-
-            }
-        } catch(Exception ex)
-        {
-
+            ps = conn.prepareStatement("select * from events");
+            rsS = ps.executeQuery(); //summary
+            request.setAttribute("Scriteria", rsS);
+            ps = conn.prepareStatement("select * from events");
+            rsC = ps.executeQuery(); //category
+            request.setAttribute("Ccriteria", rsC);
+            request.getRequestDispatcher("Tables.jsp").forward(request,response);
+          }
         }
+        
+          catch (SQLException | ClassNotFoundException ex) 
+            {
+                System.out.println("Failure");
+            }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

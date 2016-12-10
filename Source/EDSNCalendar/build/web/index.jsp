@@ -35,32 +35,15 @@
       <ul class="dropdown-menu">
         <li><a href="#"><i class="icon-user"></i> My Profile</a></li>
         <li class="divider"></li>
-        <li><a href="#"><i class="icon-check"></i> My Tasks</a></li>
-        <li class="divider"></li>
         <li><a href="login.jsp"><i class="icon-key"></i> Log Out</a></li>
       </ul>
     </li>
-    <li class="dropdown" id="menu-messages"><a href="#" data-toggle="dropdown" data-target="#menu-messages" class="dropdown-toggle"><i class="icon icon-envelope"></i> <span class="text">Messages</span> <span class="label label-important">5</span> <b class="caret"></b></a>
-      <ul class="dropdown-menu">
-        <li><a class="sAdd" title="" href="#"><i class="icon-plus"></i> new message</a></li>
-        <li class="divider"></li>
-        <li><a class="sInbox" title="" href="#"><i class="icon-envelope"></i> inbox</a></li>
-        <li class="divider"></li>
-        <li><a class="sOutbox" title="" href="#"><i class="icon-arrow-up"></i> outbox</a></li>
-        <li class="divider"></li>
-        <li><a class="sTrash" title="" href="#"><i class="icon-trash"></i> trash</a></li>
-      </ul>
-    </li>
-    <li class=""><a title="" href="#"><i class="icon icon-cog"></i> <span class="text">Settings</span></a></li>
+    <li class=""><a title="" href="Settings"><i class="icon icon-cog"></i> <span class="text">Settings</span></a></li>
     <li class=""><a title="" href="login.jsp"><i class="icon icon-share-alt"></i> <span class="text">Logout</span></a></li>
   </ul>
 </div>
 <!--close-top-Header-menu-->
 <!--start-top-serch-->
-<div id="search">
-  <input type="text" placeholder="Search here..."/>
-  <button type="submit" class="tip-bottom" title="Search"><i class="icon-search icon-white"></i></button>
-</div>
 <!--close-top-serch-->
 <!--sidebar-menu-->
 <div id="sidebar"><a href="#" class="visible-phone"><i class="icon icon-home"></i> Dashboard</a>
@@ -68,7 +51,7 @@
     <li class="active"><a href="index.jsp"><i class="icon icon-home"></i> <span>Dashboard</span></a> </li>
     <li> <a href="GetEvents"><i class="icon icon-list-alt"></i> <span>Events</span></a> </li>
     <li> <a href="organize.jsp"><i class="icon icon-tags"></i> <span>Organize</span></a> </li>
-    <li><a href="settings.jsp"><i class="icon icon-wrench"></i> <span>Settings</span></a></li>
+    <li><a href="Settings"><i class="icon icon-wrench"></i> <span>Settings</span></a></li>
     <li><a href="GetUsers"><i class="icon icon-user"></i> <span>Users</span></a></li>
     <li><a href="widgetcreator.jsp"><i class="icon icon-pencil"></i> <span>Widget Creator</span></a></li>
   </ul>
@@ -91,11 +74,54 @@
         <li class="bg_lg span3"> <a href=GetEvents> <i class="icon-list-alt"></i> Events</a> </li>
         <div><li class="bg_ly span3"> <a href="GetEvents"> <i class="icon-inbox"></i> <div id="unapprovedCount"></div> Events waiting for approval </a> </li>
         <li class="bg_lo"> <a href="organize.jsp"> <i class="icon-tags"></i> Organize</a> </li>
-        <li class="bg_ls"> <a href="settings.jsp"> <i class="icon-wrench"></i> Settings</a> </li>
-        <li class="bg_lo span3"> <a href="users.jsp"> <i class="icon-user"></i> Users</a> </li>
+        <li class="bg_ls"> <a href="Settings"> <i class="icon-wrench"></i> Settings</a> </li>
+        <li class="bg_lo span3"> <a href="GetUsers"> <i class="icon-user"></i> Users</a> </li>
+        <li class="bg_lg span3"> <a href="#" data-toggle="modal" data-target="#myModal"> <i class="icon-plus"></i> Add Event</a> </li>
         <li class="bg_lb"> <a href="widgetcreator.jsp"> <i class="icon-pencil"></i> Widget Creator</a> </li>
       </ul>
     </div>
+ <div id="myCalendar" class="align" >
+      <iframe src="https://calendar.google.com/calendar/embed?height=900&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=l0u6k0e8s4i26sgpoh68g9e2io%40group.calendar.google.com&amp;color=%235F6B02&amp;ctz=America%2FNew_York" style="border-width:1px;border-style:solid;" width="89.75%" height="700" frameborder="1" scrolling="no"></iframe>
+  </div>
+  <div class="container">
+      <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">POST YOUR EVENT</h4>
+            </div>
+            <div class="modal-body">
+              <form action="EventSubmit" method="POST">
+                <input type="text" class="form-control margins" name="fullName" maxlength="50" placeholder="Your full name (required)">
+                <input type="text" class="form-control margins" name="email" maxlength="50" placeholder="Your email (required)">
+                <input type="text" class="form-control margins" name="title" maxlength="50" placeholder="Event title (required)">
+                <input type="text" class="form-control margins" name="address" maxlength="20" placeholder="Address (required)">
+                <input type="text" class="form-control margins" name="city" maxlength="20" placeholder="City (required)">
+                <input type="text" class="form-control margins" name="state" maxlength="2" placeholder="State (required)">
+                <input type="text" class="form-control margins" name="zip" maxlength="5" placeholder="Zip Code (required)">
+                <table>
+                  <tr>
+                    <td class="align"><label>Start Date/Time:</label></td>
+                    <td><input type="date" class="form-control margins" name="strdate" placeholder="mm/dd/yyyy"></td>
+                    <td><input type="time" class="form-control margins" name="strtime" placeholder="00:00AM/PM"></td>
+                  </tr>
+                  <tr>
+                    <td class="align"><label>End Date/Time:</label></td>
+                    <td><input type="date" class="form-control margins" name="enddate" placeholder="mm/dd/yyyy"></td>
+                    <td><input type="time" class="form-control margins" name="endtime" placeholder="00:00AM/PM"></td>
+                  </tr>
+                </table>
+                  <textarea name="description" class="form-control margins" placeholder="Description (required - 100 character limit)" maxlength="100"></textarea>
+                  <div class="modal-footer">              
+                    <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                  </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
 <!--End-Action boxes-->    
 
 

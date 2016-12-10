@@ -1,11 +1,16 @@
+package Users;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 
+import Settings.Settings;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.security.MessageDigest;
+import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,15 +19,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.sql.Connection;
-import java.sql.SQLException;
 
 /**
  *
- * @author Chris
+ * @author gotoel
  */
-@WebServlet(urlPatterns = {"/GetEvents"})
-public class GetEvents extends HttpServlet {
+@WebServlet(urlPatterns = {"/UserManager"})
+public class UserManager extends HttpServlet {
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -36,35 +40,33 @@ public class GetEvents extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         Connection con;
-        PreparedStatement ps,psS;
-        ResultSet rs,rsS,rsC;      
-        try 
+        PreparedStatement ps;
+        ResultSet rs; 
+        try (PrintWriter out = response.getWriter()) { 
+            // Get management action
+            String action = request.getParameter("action");
+            
+            // Initialize DB stuff
+            Class.forName(Settings.dbDriver);
+            con = DriverManager.getConnection(Settings.dbURL,Settings.dbUsername,Settings.dbPass);
+            
+            if(action.equals("addUser"))
             {
-                Class.forName(DBInfo.dbDriver);
-                con= DriverManager.getConnection(DBInfo.dbURL,DBInfo.dbUsername,DBInfo.dbPass);
-                ps=con.prepareStatement("select * from events");
-                rs=ps.executeQuery();
-                
-                request.setAttribute("events",rs);
-                psS=con.prepareStatement("select * from events");
-                rsS = psS.executeQuery();
-                request.setAttribute("Scriteria",rsS); //summary
-                ps = con.prepareStatement("select * from events");
-                rsC = ps.executeQuery();
-                request.setAttribute("Ccriteria", rsC); //description
-                request.getRequestDispatcher("Tables.jsp").forward(request,response);
-                
 
             }
-            catch (SQLException | ClassNotFoundException ex) 
+            else if(action.equals("deleteUser"))
             {
-                System.out.println("Failure");
-            }
 
-                
-     }
-    
-    
+            }
+            else if(action.equals("editUser"))
+            {
+
+            }
+        } catch(Exception ex)
+        {
+
+        }
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -103,8 +105,6 @@ public class GetEvents extends HttpServlet {
     @Override
     public String getServletInfo() {
         return "Short description";
-    } // </editor-fold>
+    }// </editor-fold>
+
 }
-
-
-
