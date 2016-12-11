@@ -240,9 +240,9 @@
                             </tr>
                         </table>
 
-                        <lable>Summary<input type="text" class="form-control margins" id="summary" placeholder="Re-enter the summary/title CANT BE BLANK!! (BUG) " name="summary" maxlength="100" style="width:530px; margin-left:18px;"></lable><br>
-                        <lable>Description<input type="text" class="form-control margins" id="description" name="description"  placeholder="Description (required - 100 character limit)" maxlength="100" style="width:530px; margin-left:18px;"></lable><br>
-                        <lable>Location<input type="text" class="form-control margins" id="location" name="location" placeholder="Location" maxlength="100" style="width:530px; margin-left:18px;"></lable><br>
+                        <lable>Summary<input type="text" class="form-control margins" id="summary1" placeholder="Re-enter the summary/title CANT BE BLANK!! (BUG) " name="summary" maxlength="100" style="width:500px;"></lable><br>
+                        <lable>Description<input type="text" class="form-control margins" id="description" name="description"  placeholder="Description (required - 100 character limit)" maxlength="100" style="width:500px;"></lable><br>
+                        <lable>Location<input type="text" class="form-control margins" id="location" name="location" placeholder="Location" maxlength="100" style="width:500px;"></lable><br>
                         <div class="modal-footer" style="background-color:#b3daff">
 
                             <button type="submit" class="btn btn-primary btn-block">Submit</button>
@@ -367,8 +367,8 @@
                                                           //summary
                                                           var summaryNode = rootNode.getElementsByTagName("summary");
                                                           var summary = summaryNode[0].firstChild.nodeValue;
-                                                          document.getElementById("summary").value = summary;
-
+                                                          document.getElementById("summary1").value = summary;
+                                                           //alert(summary);
 
                                                           //description
                                                           var descriptionNode = rootNode.getElementsByTagName("description");
