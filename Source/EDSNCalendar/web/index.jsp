@@ -81,7 +81,7 @@
       </ul>
     </div>
  <div id="myCalendar" class="align" >
-      <iframe src="https://calendar.google.com/calendar/embed?height=900&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=l0u6k0e8s4i26sgpoh68g9e2io%40group.calendar.google.com&amp;color=%235F6B02&amp;ctz=America%2FNew_York" style="border-width:1px;border-style:solid;" width="89.75%" height="700" frameborder="1" scrolling="no"></iframe>
+      <iframe src="https://calendar.google.com/calendar/embed?showTitle=0&amp;height=900&amp;wkst=1&amp;bgcolor=%23ffffff&amp;src=1b0fgl15no2em0s761g3nmsojk%40group.calendar.google.com&amp;color=%23125A12&amp;src=drcg5o2lrknp529espcaerom6g%40group.calendar.google.com&amp;color=%23B1365F&amp;src=4lc9vqncnpcs7l6j8v8fmi9k4o%40group.calendar.google.com&amp;color=%2323164E&amp;src=b9vn1j2c33h3t0q8rlhmq1tn9s%40group.calendar.google.com&amp;color=%238C500B&amp;ctz=America%2FNew_York" style="border-width:1px;border-style:solid;" width="89.75%" height="700" frameborder="1" scrolling="no"></iframe>
   </div>
   <div class="container">
       <div class="modal fade" id="myModal" role="dialog">
