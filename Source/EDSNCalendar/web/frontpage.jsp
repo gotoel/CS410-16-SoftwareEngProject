@@ -38,15 +38,15 @@ and open the template in the editor.
             </div>
             <div class="modal-body">
               <form action="EventSubmit" method="POST">
-                <input type="text" class="form-control margins" name="fullName" maxlength="50" placeholder="Your full name (required)">
-                <input type="text" class="form-control margins" name="email" maxlength="50" placeholder="Your email (required)">
-                <input type="text" class="form-control margins" name="title" maxlength="50" placeholder="Event title (required)">
-                <input type="text" class="form-control margins" name="address" maxlength="80" placeholder="Address (required)">
-                <input type="text" class="form-control margins" name="city" maxlength="20" placeholder="City (required)">
-                <input type="text" class="form-control margins" name="state" maxlength="2" placeholder="State (required)">
-                <input type="text" class="form-control margins" name="zip" maxlength="5" placeholder="Zip Code (required)">
+                <input type="text" class="form-control margins" name="fullName" maxlength="50" required placeholder="Your full name (required)">
+                <input type="text" class="form-control margins" name="email" maxlength="50" required placeholder="Your email (required)">
+                <input type="text" class="form-control margins" name="title" maxlength="50" required placeholder="Event title (required)">
+                <input type="text" class="form-control margins" name="address" maxlength="80" required placeholder="Address (required)">
+                <input type="text" class="form-control margins" name="city" maxlength="20" required placeholder="City (required)">
+                <input type="text" class="form-control margins" name="state" maxlength="2" required placeholder="State (required)">
+                <input type="text" class="form-control margins" name="zip" maxlength="5" required placeholder="Zip Code (required)">
                 <label>Select category:</label>
-                <select name="categories">
+                <select required name="categories">
                     <option value="Education">Education</option>
                     <option value="Music">Music</option>
                     <option value="Religion">Religion</option>
@@ -55,13 +55,13 @@ and open the template in the editor.
                 <table>
                   <tr>
                     <td class="align"><label>Start Date/Time:</label></td>
-                    <td><input type="date" class="form-control margins" name="strdate" placeholder="yyyy-mm-dd"></td>
-                    <td><input type="time" class="form-control margins" name="strtime" placeholder="HH-MM-SS"></td>
+                    <td><input type="date" class="form-control margins" name="strdate" required placeholder="yyyy-mm-dd"></td>
+                    <td><input type="time" class="form-control margins" name="strtime" required placeholder="HH-MM-SS"></td>
                   </tr>
                   <tr>
                     <td class="align"><label>End Date/Time:</label></td>
-                    <td><input type="date" class="form-control margins" name="enddate" placeholder="yyyy-mm-dd"></td>
-                    <td><input type="time" class="form-control margins" name="endtime" placeholder="HH-MM-SS"></td>
+                    <td><input type="date" class="form-control margins" name="enddate" required placeholder="yyyy-mm-dd"></td>
+                    <td><input type="time" class="form-control margins" name="endtime" required placeholder="HH-MM-SS"></td>
                   </tr>
                 </table>
                   <textarea name="description" class="form-control margins" placeholder="Description (required - 100 character limit)" maxlength="100"></textarea>
