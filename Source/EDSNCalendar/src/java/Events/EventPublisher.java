@@ -80,7 +80,7 @@ public class EventPublisher extends HttpServlet {
     public static Credential authorize() throws IOException {
         // Load client secrets.
         InputStream in
-                = CalendarInsert.class.getResourceAsStream(Settings.credentialsFile);
+                = EventPublisher.class.getResourceAsStream(Settings.credentialsFile);
         GoogleClientSecrets clientSecrets
                 = GoogleClientSecrets.load(JSON_FACTORY, new InputStreamReader(in));
 
@@ -114,6 +114,7 @@ public class EventPublisher extends HttpServlet {
         Connection con;
         PreparedStatement ps;
         ResultSet rs;
+        String calendarId;
         PrintWriter out = response.getWriter();
         try {
             // Get the eventID and action out of parameters.
@@ -153,30 +154,52 @@ public class EventPublisher extends HttpServlet {
                     rs = ps.executeQuery();
 
                     //<-------------------------------------------Calendar Interfacing Begins Here---------------------------------------------------------------->
+                    if(action.equals("delete") == false)
+                    {
                     com.google.api.services.calendar.Calendar service = getCalendarService();
                     rs.next();
                     //Build the event
+                    String category= rs.getString("category");
                     Event event = new Event()
                             .setSummary(rs.getString("summary"))
                             .setLocation(rs.getString("location"))
-                            .setDescription(rs.getString("description"));
-                    DateTime startDateTime = new DateTime(rs.getString("start_date")+"T"+rs.getString("start_time")+"Z");
+                            .setDescription(rs.getString("description"))
+                            .setId((rs.getString("id"))+"abc"); //An event's ID is just the id from the db+"abc" appended to it
+                    DateTime startDateTime = new DateTime(rs.getString("start_date")+"T"+rs.getString("start_time")+"-05:00");
                     //DateTime startDateTime = new DateTime("2016-11-11T09:00:00-07:00");
-
+                    
                     EventDateTime start = new EventDateTime()
                             .setDateTime(startDateTime)
-                            .setTimeZone("America/Cancun");
+                            .setTimeZone("America/New_York");
 
                     event.setStart(start);
-                    DateTime endDateTime = new DateTime(rs.getString("end_date")+"T"+rs.getString("end_time")+"Z");
+                    DateTime endDateTime = new DateTime(rs.getString("end_date")+"T"+rs.getString("end_time")+"-05:00");
                     //DateTime endDateTime = new DateTime("2016-11-11T17:00:00-07:00");
                     EventDateTime end = new EventDateTime()
                             .setDateTime(endDateTime)
-                            .setTimeZone("America/Cancun");
+                            .setTimeZone("America/New_York");
                     event.setEnd(end);
-
-                    String calendarId = "l0u6k0e8s4i26sgpoh68g9e2io@group.calendar.google.com";
+                    
+                    
+                    if(category.equalsIgnoreCase("education"))
+                        calendarId="1b0fgl15no2em0s761g3nmsojk@group.calendar.google.com";
+                    else if (category.equalsIgnoreCase("religion"))
+                        calendarId="drcg5o2lrknp529espcaerom6g@group.calendar.google.com";
+                    else if (category.equalsIgnoreCase("sport"))
+                        calendarId="b9vn1j2c33h3t0q8rlhmq1tn9s@group.calendar.google.com";
+                    else if (category.equalsIgnoreCase("music"))
+                        calendarId="drcg5o2lrknp529espcaerom6g@group.calendar.google.com";
+                    else
+                        calendarId = "l0u6k0e8s4i26sgpoh68g9e2io@group.calendar.google.com";
+                    //String EduCal= "1b0fgl15no2em0s761g3nmsojk@group.calendar.google.com";
+                    //String ReligionCal= "drcg5o2lrknp529espcaerom6g@group.calendar.google.com";
+                    //String SportCal= "b9vn1j2c33h3t0q8rlhmq1tn9s@group.calendar.google.com";
+                    //String MusicCal= "drcg5o2lrknp529espcaerom6g@group.calendar.google.com";
+                    //String calendarId = "l0u6k0e8s4i26sgpoh68g9e2io@group.calendar.google.com";
+                    
+                    
                     event = service.events().insert(calendarId, event).execute();
+                    }
                     //<-------------------------------Calendar Interfacing Ends Here-------------------------------------------------------------------------------->
                     
                     //request.setAttribute("eventToInsert",rs);

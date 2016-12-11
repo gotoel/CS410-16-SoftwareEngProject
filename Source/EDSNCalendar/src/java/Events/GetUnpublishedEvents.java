@@ -64,7 +64,6 @@ public class GetUnpublishedEvents extends HttpServlet {
                     outString += "\t<td> <center>" + rs.getString("summary") + "</center></td>\n";
                     outString += "\t<td> <center>" + rs.getString("description") + "</center></td>\n";
                     outString += "\t<td> <center>" + rs.getString("location") + "</center></td>\n";
-                    outString += "\t<td> <center>" + rs.getString("colorId") + "</center></td>\n";
                     
                     // Add the 'publish' and 'delete' buttons to the last column
                     // these will contain the javascript calls for the appropriate actions.

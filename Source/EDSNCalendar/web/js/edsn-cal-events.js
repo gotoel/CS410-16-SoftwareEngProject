@@ -95,6 +95,27 @@ function sendMail(eventID)
     
     xmlhttp.send();
     }
+    
+    function unpublish(eventID)
+{
+    if (window.XMLHttpRequest){
+        xmlhttp = new XMLHttpRequest();
+    } else {
+        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    
+    var url = "EventUnpublisher";
+    xmlhttp.open("POST", url + "?eventID="+eventID,true);
+    xmlhttp.onreadystatechange = function()
+    {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            console.log("DONE");
+            document.getElementById("publisherResult").innerHTML = xmlhttp.responseText;
+        }
+    };
+    
+    xmlhttp.send();
+    }
 
 function publishSelected()
 {

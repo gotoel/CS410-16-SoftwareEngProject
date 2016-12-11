@@ -22,7 +22,7 @@ and open the template in the editor.
   </div>    
     <!--<a href="CalendarInsert"><i class="icon icon-list-alt"></i> <span>Debug event insertion</span></a>-->
   <div id="myCalendar" class="align" >
-      <iframe src="https://calendar.google.com/calendar/embed?height=900&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=l0u6k0e8s4i26sgpoh68g9e2io%40group.calendar.google.com&amp;color=%235F6B02&amp;ctz=America%2FNew_York" style="border-width:0" width="1600" height="900" frameborder="0" scrolling="no"></iframe>
+     <iframe src="https://calendar.google.com/calendar/embed?showTitle=0&amp;height=900&amp;wkst=1&amp;bgcolor=%23ffffff&amp;src=1b0fgl15no2em0s761g3nmsojk%40group.calendar.google.com&amp;color=%23125A12&amp;src=drcg5o2lrknp529espcaerom6g%40group.calendar.google.com&amp;color=%23B1365F&amp;src=4lc9vqncnpcs7l6j8v8fmi9k4o%40group.calendar.google.com&amp;color=%2323164E&amp;src=b9vn1j2c33h3t0q8rlhmq1tn9s%40group.calendar.google.com&amp;color=%238C500B&amp;ctz=America%2FNew_York" style="border-width:0" width="1600" height="900" frameborder="0" scrolling="no"></iframe>
   </div>
   <div class="container">
     <div class="align">
@@ -41,7 +41,7 @@ and open the template in the editor.
                 <input type="text" class="form-control margins" name="fullName" maxlength="50" placeholder="Your full name (required)">
                 <input type="text" class="form-control margins" name="email" maxlength="50" placeholder="Your email (required)">
                 <input type="text" class="form-control margins" name="title" maxlength="50" placeholder="Event title (required)">
-                <input type="text" class="form-control margins" name="address" maxlength="20" placeholder="Address (required)">
+                <input type="text" class="form-control margins" name="address" maxlength="80" placeholder="Address (required)">
                 <input type="text" class="form-control margins" name="city" maxlength="20" placeholder="City (required)">
                 <input type="text" class="form-control margins" name="state" maxlength="2" placeholder="State (required)">
                 <input type="text" class="form-control margins" name="zip" maxlength="5" placeholder="Zip Code (required)">
@@ -55,13 +55,13 @@ and open the template in the editor.
                 <table>
                   <tr>
                     <td class="align"><label>Start Date/Time:</label></td>
-                    <td><input type="date" class="form-control margins" name="strdate" placeholder="mm/dd/yyyy"></td>
-                    <td><input type="time" class="form-control margins" name="strtime" placeholder="00:00AM/PM"></td>
+                    <td><input type="date" class="form-control margins" name="strdate" placeholder="yyyy-mm-dd"></td>
+                    <td><input type="time" class="form-control margins" name="strtime" placeholder="HH-MM-SS"></td>
                   </tr>
                   <tr>
                     <td class="align"><label>End Date/Time:</label></td>
-                    <td><input type="date" class="form-control margins" name="enddate" placeholder="mm/dd/yyyy"></td>
-                    <td><input type="time" class="form-control margins" name="endtime" placeholder="00:00AM/PM"></td>
+                    <td><input type="date" class="form-control margins" name="enddate" placeholder="yyyy-mm-dd"></td>
+                    <td><input type="time" class="form-control margins" name="endtime" placeholder="HH-MM-SS"></td>
                   </tr>
                 </table>
                   <textarea name="description" class="form-control margins" placeholder="Description (required - 100 character limit)" maxlength="100"></textarea>

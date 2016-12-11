@@ -27,6 +27,14 @@
         <servlet-name>UserInsert</servlet-name>
         <servlet-class>Users.UserInsert</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>EventUnpublisher</servlet-name>
+        <servlet-class>Events.EventUnpublisher</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EventUnpublisher</servlet-name>
+        <url-pattern>/EventUnpublisher</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30

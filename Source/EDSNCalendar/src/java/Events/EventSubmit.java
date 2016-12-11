@@ -58,7 +58,7 @@ public class EventSubmit extends HttpServlet {
             String location = address + ", " + city + " " + state + ", " + zipCode;
             Class.forName(Settings.dbDriver);
             con = DriverManager.getConnection(Settings.dbURL,Settings.dbUsername,Settings.dbPass);
-            ps = con.prepareStatement("insert into events (ID,start_date,start_time,end_date,end_time,summary,description,location,colorId,ispublished,Category,subName,subEmail) values (null,?,?,?,?,?,?,?,'idk',0,?,?,?)");
+            ps = con.prepareStatement("insert into events (ID,start_date,start_time,end_date,end_time,summary,description,location,ispublished,category,subName,subEmail) values (null,?,?,?,?,?,?,?,0,?,?,?)");
             ps.setString(1, strDate);
             ps.setString(2, strTime);
             ps.setString(3, endDate);

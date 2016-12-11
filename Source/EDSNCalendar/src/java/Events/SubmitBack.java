@@ -6,7 +6,11 @@ package Events;
  * and open the template in the editor.
  */
 
+import static Events.EventPublisher.getCalendarService;
+import com.google.api.services.calendar.model.Event;
 import Settings.Settings;
+import com.google.api.client.util.DateTime;
+import com.google.api.services.calendar.model.EventDateTime;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -17,7 +21,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import java.sql.ResultSet;
 /**
  *
  * @author TOMEK
@@ -40,30 +44,79 @@ public class SubmitBack extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         Connection con;
         PreparedStatement ps;
+        ResultSet rs;
         PrintWriter out = response.getWriter();
         try  {
             String strDate = request.getParameter("startdate");
+            //strDate.replaceAll("\\s","");
             String strTime = request.getParameter("starttime");
+            //strTime.replaceAll("\\s","");
             String endDate = request.getParameter("enddate");
             String endTime = request.getParameter("endtime");
             String descrpt = request.getParameter("description");
             String location = request.getParameter("location");
+            String summary = request.getParameter("summary");
             Integer id = Integer.parseInt(request.getParameter("anID"));
             Class.forName(Settings.dbDriver);
             con = DriverManager.getConnection(Settings.dbURL,Settings.dbUsername,Settings.dbPass);
-            //ps = con.prepareStatement("insert into events (ID,start_date,start_time,end_date,end_time,summary,description,location,colorId,ispublished) values (null,?,?,?,?,?,?,?,'idk',0)");
-            ps = con.prepareStatement("update events set start_date =?, start_time=?, end_date=?, end_time=?,description=?,location=? WHERE id=?");
+
+            ps = con.prepareStatement("update events set start_date =?, start_time=?, end_date=?, end_time=?, description=?, location=?, summary=? WHERE id=?");
             ps.setString(1, strDate);
             ps.setString(2, strTime);
             ps.setString(3, endDate);
             ps.setString(4, endTime);
             ps.setString(5, descrpt);
             ps.setString(6, location);
-            ps.setInt(7, id);
+            ps.setString(7, summary);
+            ps.setInt(8, id);
             ps.executeUpdate();
-            ps.close();
-            con.close();
+            //ps.close();
+            
+            ps = con.prepareStatement("Select * from events where id=?");
+            ps.setString(1,request.getParameter("anID"));
+            rs=ps.executeQuery();
+            //ps.close();
+            //con.close();
+            rs.next();
+            String category = rs.getString("category");
+            String calendarId;
+            
+            
+            //Initialize google calendar 
+            com.google.api.services.calendar.Calendar service = getCalendarService();
+            if(category.equalsIgnoreCase("education"))
+                        calendarId="1b0fgl15no2em0s761g3nmsojk@group.calendar.google.com";
+                    else if (category.equalsIgnoreCase("religion"))
+                        calendarId="drcg5o2lrknp529espcaerom6g@group.calendar.google.com";
+                    else if (category.equalsIgnoreCase("sport"))
+                        calendarId="b9vn1j2c33h3t0q8rlhmq1tn9s@group.calendar.google.com";
+                    else if (category.equalsIgnoreCase("music"))
+                        calendarId="drcg5o2lrknp529espcaerom6g@group.calendar.google.com";
+                    else
+                        return;
+            
+            Event event = service.events().get(calendarId,request.getParameter("anID")+"abc").execute(); //The eventID is just the id from db with "abc" appended
+            
+            event.setLocation(location);
+            event.setDescription(descrpt);
+            event.setSummary(summary);
+                    DateTime startDateTime = new DateTime(strDate+"T"+strTime+"-05:00");
+                    EventDateTime start = new EventDateTime()
+                            .setDateTime(startDateTime)
+                            .setTimeZone("America/New_York");
+                    event.setStart(start);
+
+                   DateTime endDateTime = new DateTime(endDate+"T"+endTime+"-05:00");
+                    EventDateTime end = new EventDateTime()
+                            .setDateTime(endDateTime)
+                            .setTimeZone("America/New_York");
+                    out.println("Right before setting endDateTime");
+                    event.setEnd(end);
+                    
+                    Event updatedEvent = service.events().update(calendarId,event.getId(),event).execute();
+                    
             response.sendRedirect("GetEvents");
+            
         } catch (Exception e) {
             out.println("Exception occured " + e.getMessage());
             e.printStackTrace();

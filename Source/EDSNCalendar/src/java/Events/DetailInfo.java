@@ -53,15 +53,15 @@ public class DetailInfo extends HttpServlet {
                 rs.next();
                 String str = "";
                 str += "<data>\n";
-                str+="<id>" + rs.getInt("id") + "</id>";
+                str +="<id>" + rs.getInt("id") + "</id>";
                 str += "<startdate>" + rs.getString("start_date") + "</startdate>\n";
                 str += "<starttime>" + rs.getString("start_time") + "</starttime>\n";
                 str += "<enddate>" + rs.getString("end_date") + "</enddate>\n";
                 str += "<endtime>" + rs.getString("end_time") + "</endtime>\n";
                 str += "<summary>" + rs.getString("summary") + "</summary>\n";
                 str += "<description>" + rs.getString("description") + "</description>\n";
-                str+= "<location>" + rs.getString("location") + "</location>";
-                str+= "</data>\n";
+                str += "<location>" + rs.getString("location") + "</location>";
+                str += "</data>\n";
                 
                 out.println(str);
                 

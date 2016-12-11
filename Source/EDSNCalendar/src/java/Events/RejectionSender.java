@@ -20,12 +20,13 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.*;
 import javax.mail.*;
 import javax.mail.internet.*;
+import javax.servlet.annotation.WebServlet;
 
 /**
  *
  * @author Chris
  */
-
+@WebServlet(urlPatterns = {"/RejectionSender"})
 public class RejectionSender extends HttpServlet {
 
     /**
@@ -56,15 +57,17 @@ public class RejectionSender extends HttpServlet {
                 //In the future this select query will bring the resultset with the offender's email for use in writing the rejection
                 //For now, I'm hardcoding my own email for debug purposes
                 
-                //ps=con.prepareStatement("select email from events where id=?");   
-                //int eventIDNum = Integer.parseInt(eventID.replaceAll("\\s+",""));
-                //ps.setInt(1,eventIDNum);
+                ps=con.prepareStatement("select * from events where id=?");   
+                int eventIDNum = Integer.parseInt(eventID.replaceAll("\\s+",""));
+                ps.setInt(1,eventIDNum);
                 
-                //ps.executeQuery();
-                
-                String senderEmail ="edsneventrejection@gmail.com"; //Password: QuickHugeCalendar
+                rs=ps.executeQuery();
+                rs.next();
+                String senderEmail ="edsneventrejection@gmail.com"; //Password: QuickHugeCalendar    
                 String senderPassword="QuickHugeCalendar";
-                String recipientEmail="cmski77@yahoo.com"; //HARDCODED RECIPIENT EMAIL (ITS MINE)
+                 //HARDCODED RECIPIENT EMAIL (ITS MINE)
+                String recipientEmail= rs.getString("subEmail");
+                //String recipientEmail="cmski77@yahoo.com";
                 String emailSMTPserver = "smtp.gmail.com";
                 String emailServerPort = "587";
                 String host = "localhost"; //Sending from this computer
@@ -105,11 +108,11 @@ public class RejectionSender extends HttpServlet {
                 message.setSubject("Event Rejection");
                 Transport.send(message);
                 
-                String successOutput = "<div class=\"alert alert-success\">\n" +
-                         "<button class=\"close\" data-dismiss=\"alert\">x</button>\n" +
-                         "<strong>Rejection Notice Sent" + 
-                         "</div>";
-                    out.println(successOutput);
+                String successOutput = "<div class=\"alert alert-success\">\n"
+                        + "<button class=\"close\" data-dismiss=\"alert\">x</button>\n"
+                        + "<strong>Rejection Notice Sent to " + recipientEmail
+                        + "</div>";
+                out.println(successOutput);
                 
                 
                 
