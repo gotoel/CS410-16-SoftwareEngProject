@@ -75,7 +75,7 @@
         <li class="bg_lo"> <a href="organize.jsp"> <i class="icon-tags"></i> Organize</a> </li>
         <li class="bg_ls"> <a href="Settings"> <i class="icon-wrench"></i> Settings</a> </li>
         <li class="bg_lo span3"> <a href="GetUsers"> <i class="icon-user"></i> Users</a> </li>
-        <li class="bg_lg span3"> <a href="#" data-toggle="modal" data-target="#myModal"> <i class="icon-plus"></i> Add Event</a> </li>o
+        <li class="bg_lg span3"> <a href="#" data-toggle="modal" data-target="#myModal"> <i class="icon-plus"></i> Add Event</a> </li>
         <li class="bg_lb"> <a href="widgetcreator.jsp"> <i class="icon-pencil"></i> Widget Creator</a> </li>
       </ul>
     </div>
