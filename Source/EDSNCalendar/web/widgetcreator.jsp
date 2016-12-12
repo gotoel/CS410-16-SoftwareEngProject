@@ -11,10 +11,20 @@
 <link rel="stylesheet" href="css/matrix-style.css" />
 <link rel="stylesheet" href="css/matrix-media.css" />
 <link href="font-awesome/css/font-awesome.css" rel="stylesheet" />
+<link rel="stylesheet" href="css/select2.css">
 <link rel="stylesheet" href="css/jquery.gritter.css" />
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/bootstrap-responsive.min.css">
+<link rel="stylesheet" href="css/colorpicker.css">
+<link rel="stylesheet" href="css/datepicker.css">
+<link rel="stylesheet" href="css/uniform.css">
+<link rel="stylesheet" href="css/select2.css">
+<link rel="stylesheet" href="css/matrix-style.css">
+<link rel="stylesheet" href="css/matrix-media.css">
+<link rel="stylesheet" href="css/bootstrap-wysihtml5.css">
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>
 </head>
-<body>
+<body class="wysihtml5-supported">
     <%
         if(request.getSession().getAttribute("username") == null ||
                 ((String)request.getSession().getAttribute("username")).isEmpty())
@@ -51,7 +61,6 @@
   <ul>
     <li><a href="index.jsp"><i class="icon icon-home"></i> <span>Dashboard</span></a> </li>
     <li> <a href="GetEvents"><i class="icon icon-list-alt"></i> <span>Events</span></a> </li>
-    <li> <a href="organize.jsp"><i class="icon icon-tags"></i> <span>Organize</span></a> </li>
     <li><a href="Settings"><i class="icon icon-wrench"></i> <span>Settings</span></a></li>
     <li><a href="GetUsers"><i class="icon icon-user"></i> <span>Users</span></a></li>
     <li class="active"><a href="widgetcreator.jsp"><i class="icon icon-pencil"></i> <span>Widget Creator</span></a></li>
@@ -70,7 +79,79 @@
 
 <!--Action boxes-->
 
-<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@PAGE CODE GOES HERE@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+<div class="container-fluid">
+  <hr>
+  <div class="row-fluid">
+    <div class="span6">
+      <div class="widget-box">
+        <div class="widget-title"> <span class="icon"> <i class="icon-align-justify"></i> </span>
+          <h5>Personal-info</h5>
+        </div>
+        <div class="widget-content nopadding">
+          <form action="#" method="get" class="form-horizontal">
+            <div class="control-group">
+              <label class="control-label">First Name :</label>
+              <div class="controls">
+                <input type="text" class="span11" placeholder="First name">
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label">Select input</label>
+              <div class="controls">
+                <div class="select2-container" id="s2id_autogen1">    
+                    <a href="#" onclick="return false;" class="select2-choice" tabindex="0">   
+                    <span>Seventh option</span>
+                    <abbr class="select2-search-choice-close" style="display:none;"></abbr>   
+                    <div><b></b></div></a>
+                    <div class="select2-drop select2-with-searchbox select2-offscreen" style="display: block;">   
+                        <div class="select2-search">       
+                            <input type="text" autocomplete="off" class="select2-input" tabindex="0">  
+                        </div>   <ul class="select2-results">
+                            
+                        </ul>
+                    </div>    
+                </div><select style="display: none;">
+                  <option>First option</option>
+                  <option>Second option</option>
+                  <option>Third option</option>
+                  <option>Fourth option</option>
+                  <option>Fifth option</option>
+                  <option>Sixth option</option>
+                  <option>Seventh option</option>
+                  <option>Eighth option</option>
+                </select>
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label">Message</label>
+              <div class="controls">
+                <textarea class="span11"></textarea>
+              </div>
+            </div>
+            <div class="form-actions">
+              <button type="submit" class="btn btn-success">Save</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+      
+    <div class="span6">
+      <div class="widget-box">
+        <div class="widget-title"> <span class="icon"> <i class="icon-align-justify"></i> </span>
+          <h5>Paste this code onto your siteorga:</h5>
+        </div>
+        <div class="widget-content" style="height: 300px;">
+          <form action="#" >
+                    <div class="controls">
+            <textarea class="span11" style="line-height: 140px; width: 100%;" readonly>
+            </textarea>
+        </div>
+          </form>
+        </div>
+      </div>
+  </div>
+</div>
 
 <!--End-Action boxes-->    
 
@@ -102,6 +183,8 @@
 <script src="js/matrix.popover.js"></script> 
 <script src="js/jquery.dataTables.min.js"></script> 
 <script src="js/matrix.tables.js"></script> 
+<script src="js/matrix.form_common.js"></script>
+<script src="js/bootstrap-wysihtml5.js"></script> 
 
 <script type="text/javascript">
   // This function is called from the pop-up menus to transfer to
