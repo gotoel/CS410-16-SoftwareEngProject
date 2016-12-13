@@ -38,6 +38,7 @@
         <li><a href="login.jsp"><i class="icon-key"></i> Log Out</a></li>
       </ul>
     </li>
+    <li class=""><a title="" href="frontpage.jsp"><i class="icon icon-calendar"></i> <span class="text">View calendar</span></a></li>
     <li class=""><a title="" href="Settings"><i class="icon icon-cog"></i> <span class="text">Settings</span></a></li>
     <li class=""><a title="" href="login.jsp"><i class="icon icon-share-alt"></i> <span class="text">Logout</span></a></li>
   </ul>
@@ -72,7 +73,7 @@
         <li class="bg_lb"> <a href="index.jsp"> <i class="icon-dashboard"></i> Dashboard </a> </li>
         <li class="bg_lg span3"> <a href=GetEvents> <i class="icon-list-alt"></i> Events</a> </li>
         <div><li class="bg_ly span3"> <a href="GetEvents"> <i class="icon-inbox"></i> <div id="unapprovedCount"></div> Events waiting for approval </a> </li>
-        <li class="bg_lo"> <a href="organize.jsp"> <i class="icon-tags"></i> Organize</a> </li>
+        <li class="bg_lo"> <a href="frontpage.jsp"> <i class="icon-calendar"></i> View published calendar</a> </li>
         <li class="bg_ls"> <a href="Settings"> <i class="icon-wrench"></i> Settings</a> </li>
         <li class="bg_lo span3"> <a href="GetUsers"> <i class="icon-user"></i> Users</a> </li>
         <li class="bg_lg span3"> <a href="#" data-toggle="modal" data-target="#myModal"  onclick="document.getElementById('invisForm').style.visibility=''"> <i class="icon-plus"></i> Add Event</a> </li>   
