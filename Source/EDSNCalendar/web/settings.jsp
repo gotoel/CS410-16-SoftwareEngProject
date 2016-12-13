@@ -24,7 +24,7 @@
     %>
 <!--Header-part-->
 <div id="header">
-  <h1><a href="dashboard.jsp">EDSN Calendar - Settings</a></h1>
+  <h1><a href="settings.jsp">EDSN Calendar - Settings</a></h1>
 </div>
 <!--close-Header-part--> 
 

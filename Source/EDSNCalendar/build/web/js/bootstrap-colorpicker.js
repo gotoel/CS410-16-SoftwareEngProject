@@ -225,6 +225,7 @@
 				});
 				if (this.component){
 					this.element.find('input').prop('value', this.format.call(this));
+                                        this.element.find('input').trigger("change")
 				}
 				this.element.data('color', this.format.call(this));
 			} else {

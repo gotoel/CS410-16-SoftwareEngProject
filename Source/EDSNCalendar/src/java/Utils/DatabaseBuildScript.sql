@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 19, 2016 at 10:54 PM
+-- Generation Time: Dec 13, 2016 at 02:46 AM
 -- Server version: 5.5.49-0+deb8u1
 -- PHP Version: 5.6.27-0+deb8u1
 
@@ -34,30 +34,30 @@ CREATE TABLE IF NOT EXISTS `events` (
   `end_time` time DEFAULT NULL,
   `summary` varchar(50) COLLATE latin1_general_ci NOT NULL,
   `description` varchar(100) COLLATE latin1_general_ci NOT NULL,
-  `location` varchar(50) COLLATE latin1_general_ci NOT NULL,
-  `colorId` varchar(50) COLLATE latin1_general_ci NOT NULL,
+  `location` varchar(100) COLLATE latin1_general_ci NOT NULL,
   `isPublished` tinyint(1) NOT NULL,
-  `Category` varchar(100) COLLATE latin1_general_ci DEFAULT NULL,
+  `category` varchar(100) COLLATE latin1_general_ci DEFAULT NULL,
   `subName` varchar(50) COLLATE latin1_general_ci NOT NULL,
   `subEmail` varchar(50) COLLATE latin1_general_ci NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=28 DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
 --
 -- Dumping data for table `events`
 --
 
-INSERT INTO `events` (`id`, `start_date`, `start_time`, `end_date`, `end_time`, `summary`, `description`, `location`, `colorId`, `isPublished`, `Category`) VALUES
-(1, '2016-11-10', '10:00:00', '2016-11-10', '12:00:00', 'Pool Party', 'It''s a Pool Party', '999 Swimming Ave, Farmington CT 02352', 'Blue?', 0, 'party','Admin','admin@admin.com'),
-(2, '2016-11-02', '07:00:00', '2016-11-02', '11:00:00', 'A Published Event', 'Good Enough to be published', '3 Publication St, New Britain Ct, 06053', 'Still No Idea', 1, 'ahh','Admin','admin@admin.com'),
-(3, '2016-11-02', '07:00:00', '2016-11-02', '11:00:00', 'A Published Event', 'DGASDGASDG', '3 Publication St, New Britain Ct, 06053', 'Still No Idea', 1, NULL,'Admin','admin@admin.com'),
-(4, '2016-11-02', '07:00:00', '2016-11-02', '11:00:00', 'A Published Event', 'sdgsagds', '3 Publication St, New Britain Ct, 06053', 'Still No Idea', 1, NULL,'Admin','admin@admin.com'),
-(5, '2016-11-02', '07:00:00', '2016-11-02', '11:00:00', 'A Published Event', 'agasgd', '3 Publication St, New Britain Ct, 06053', 'Still No Idea', 0, NULL,'Admin','admin@admin.com'),
-(6, '2016-11-02', '07:00:00', '2016-11-02', '11:00:00', 'A Published Event', 'Ggdag', '3 Publication St, New Britain Ct, 06053', 'Still No Idea', 0, NULL,'Admin','admin@admin.com'),
-(7, '2016-11-02', '07:00:00', '2016-11-02', '11:00:00', 'A Published Event', 'Goodasdgasdghed', '3 Publication St, New Britain Ct, 06053', 'Still No Idea', 0, NULL,'Admin','admin@admin.com'),
-(8, '2016-11-02', '07:00:00', '2016-11-02', '11:00:00', 'A Published Event', 'Good Enoasdgpublished', '3 Publication St, New Britain Ct, 06053', 'Still No Idea', 0, NULL,'Admin','admin@admin.com'),
-(9, '2016-11-02', '07:00:00', '2016-11-02', '11:00:00', 'A Published Event', 'Good Enouasdgasdgasdpublished', '3 Publication St, New Britain Ct, 06053', 'Still No Idea', 1, NULL,'Admin','admin@admin.com'),
-(10, '2016-11-02', '07:00:00', '2016-11-02', '11:00:00', 'A Published Event', 'Good Enough to be published', '3 Publication St, New Britain Ct, 06053', 'Still No Idea', 0, NULL,'Admin','admin@admin.com'),
-(11, '2016-11-02', '07:00:00', '2016-11-02', '11:00:00', 'A Published Event', 'Gooasdgasdgablished', '3 Publication St, New Britain Ct, 06053', 'Still No Idea', 1, NULL,'Admin','admin@admin.com');
+INSERT INTO `events` (`id`, `start_date`, `start_time`, `end_date`, `end_time`, `summary`, `description`, `location`, `isPublished`, `category`, `subName`, `subEmail`) VALUES
+(27, '2016-12-13', '04:00:00', '2016-12-13', '05:00:00', 'Beers after presentation', 'Food and drinks', '1433 East St, New Britain CT, 06053', 0, 'Music', 'Tom', 'hi@reddit.com'),
+(26, '2016-12-13', '14:00:00', '2016-12-13', '16:00:00', 'Final Presentation', 'The day has come', '1615 Stanley St, New Britain CT, 06053', 0, 'Education', 'Tom', 'myemail@email.com'),
+(28, '2016-12-13', '14:00:00', '2016-12-13', '16:00:00', 'Example event', 'Example description', '1615 Stanley St, New Britain CT, 06053', 0, 'Education', 'Tom', 'myemail@email.com'),
+(29, '2016-12-13', '14:00:00', '2016-12-13', '16:00:00', 'Example event', 'Example description', '1615 Stanley St, New Britain CT, 06053', 0, 'Education', 'Tom', 'myemail@email.com'),
+(30, '2016-12-13', '14:00:00', '2016-12-13', '16:00:00', 'Example event', 'Example description', '1615 Stanley St, New Britain CT, 06053', 0, 'Education', 'Tom', 'myemail@email.com'),
+(31, '2016-12-13', '14:00:00', '2016-12-13', '16:00:00', 'Example event', 'Example description', '1615 Stanley St, New Britain CT, 06053', 0, 'Education', 'Tom', 'myemail@email.com'),
+(32, '2016-12-13', '14:00:00', '2016-12-13', '16:00:00', 'Example event', 'Example description', '1615 Stanley St, New Britain CT, 06053', 0, 'Education', 'Tom', 'myemail@email.com'),
+(33, '2016-12-13', '14:00:00', '2016-12-13', '16:00:00', 'Example event', 'Example description', '1615 Stanley St, New Britain CT, 06053', 0, 'Education', 'Tom', 'myemail@email.com'),
+(21, '2016-12-28', '12:00:00', '2016-12-31', '10:00:00', 'Testing (This event was modified admin-side)', 'Testing categories, email, other things', '123 Stanley St, New Britain CT 06053', 1, 'Sport', 'Chris Mazurski', 'cmski77@yahoo.com'),
+(22, '2016-12-31', '12:00:00', '2016-12-31', '13:00:00', 'Chris just changed this', 'Testing categories, email, other things', '123 Stanley St, New Britain CT 06053', 1, 'Music', 'Chris Mazurski', 'cmski77@yahoo.com'),
+(24, '2016-12-27', '17:30:00', '2016-12-27', '19:00:00', 'Definitive Testtest2', 'Testing categories, email, other things', '123 Stanley St, New Britain CT 06053', 0, 'Education', 'Chris Mazurski', 'cmski77@yahoo.com'),
+(25, '2016-12-12', '06:30:00', '2016-12-12', '12:00:00', 'Definitive testing', 'Testing categories, email, other things', '123 Stanley St, New Britain CT 06053', 1, 'Religion', 'Chris Mazurski', 'cmski77@yahoo.com');
 
 -- --------------------------------------------------------
 
@@ -70,14 +70,17 @@ CREATE TABLE IF NOT EXISTS `users` (
   `username` varchar(255) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
   `access_level` tinyint(4) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `access_level`) VALUES
-(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 4);
+(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 4),
+(5, 'tomek', '202cb962ac59075b964b07152d234b70', 4),
+(6, 'tomek', '0192023a7bbd73250516f069df18b500', 2),
+(7, 'test', 'b09c600fddc573f117449b3723f23d64', 2);
 
 --
 -- Indexes for dumped tables
@@ -87,7 +90,7 @@ INSERT INTO `users` (`id`, `username`, `password`, `access_level`) VALUES
 -- Indexes for table `events`
 --
 ALTER TABLE `events`
- ADD PRIMARY KEY (`id`);
+ ADD PRIMARY KEY (`id`), ADD FULLTEXT KEY `subName` (`subName`), ADD FULLTEXT KEY `subName_2` (`subName`);
 
 --
 -- Indexes for table `users`
@@ -103,13 +106,12 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `events`
 --
 ALTER TABLE `events`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=28;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-    
