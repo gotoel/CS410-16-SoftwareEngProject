@@ -139,7 +139,7 @@
     <div class="span6">
       <div class="widget-box">
         <div class="widget-title"> <span class="icon"> <i class="icon-align-justify"></i> </span>
-          <h5>Paste this code onto your siteorga:</h5>
+          <h5>Paste this code onto your site:</h5>
         </div>
         <div class="widget-content" style="height: 300px;">
           <form action="#" >
