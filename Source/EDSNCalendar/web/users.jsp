@@ -69,17 +69,17 @@
                         <form action="UserInsert" method="POST">
                             <table>
                                 <tr>
-                                    <td><input type="text" name="username" placeholder="Username"/></td>
+                                    <td><input type="text" name="username" required maxlength="30" placeholder="Username"/></td>
                                 </tr>
                                 <tr>
-                                    <td><input type="password" name="password" placeholder="Password"/></td>
+                                    <td><input type="password" name="password" required maxlength="20" placeholder="Password"/></td>
                                 </tr>
                                 <tr>
-                                    <td><input type="password" placeholder="Confirm Password"/></td>
+                                    <td><input type="password" required maxlength="20" placeholder="Confirm Password"/></td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <select name="accessLvl">
+                                        <select required name="accessLvl">
                                             <option value="1" selected>View access only</option>
                                             <option value="2">View with event edit</option>
                                             <option value="3">View with event & user edit</option>
